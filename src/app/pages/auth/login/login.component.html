@@ -1,0 +1,64 @@
+<div class="login-wrap">
+  <div class="login">
+    <div class="form-wrap">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="form-group">
+          <div class="adm-input-wrap">
+            <div class="title">
+              Sign In to Admerasia
+            </div>
+            <div class="adm-input-custom">
+              <div class="adm-input-top">
+                <label for="email">Email</label>
+              </div>
+              <input type="text" id="email" placeholder="Email" formControlName="email">
+            </div>
+            <div
+              *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+              class="validation"
+            >
+              <small *ngIf="errors('email').required">
+                Email field cannot be empty.
+              </small>
+              <small *ngIf="errors('email').email">
+                Please enter a valid email.
+              </small>
+            </div>
+          </div>
+          <div class="adm-input-wrap">
+            <div class="adm-input-custom">
+              <div class="adm-input-top">
+                <label for="password">Password</label>
+                <a routerLink="/auth/forgot-password">Forgot Password?</a>
+              </div>
+              <input type="password" id="password" placeholder="Password" formControlName="password">
+            </div>
+            <div
+              *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+              class="validation"
+            >
+              <small *ngIf="errors('password').required">
+                Password field cannot be empty.
+              </small>
+              <small *ngIf="errors('password').minlength">
+                {{
+                "Password cannot be less: " +
+                errors("password").minlength?.requiredLength +
+                ' You entered: ' + errors("password").minlength?.actualLength
+                }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="validation" *ngIf="errorMessage">
+          <small>{{ errorMessage }}</small>
+        </div>
+
+        <div class="button">
+          <button type="submit" >Login</button>
+        </div>
+      </form>
+      <adm-loader-logo [loading]="loading"></adm-loader-logo>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div animate [animateToggle]="isShowBanner$ | async" [animationShowTransitionMS]="0"
+    class="spectotor-top-banner-wrapper">
+    <div class="current-role">
+        <h4>{{ currentRole }}</h4>
+    </div>
+    <div class="selected-role">
+        <kendo-svg-icon class="icon" *ngIf="glassesIcon" [icon]="glassesIcon" />
+        <h4>Demonstration mode as <span>{{ selectedRole }}</span></h4>
+    </div>
+    <div class="exit-the-mode">
+        <adm-button br="white" color="white" prependIcon="close" (onClick)="deactivateSpectatorMode()">
+            Exit the mode
+        </adm-button>
+    </div>
+    <span class="left-border"></span>
+    <span class="right-border"></span>
+    <span class="bottom-border"></span>
+</div>

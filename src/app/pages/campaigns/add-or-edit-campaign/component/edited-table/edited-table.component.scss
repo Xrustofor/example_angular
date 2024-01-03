@@ -1,0 +1,87 @@
+.edited_table{
+  font-family: "Roboto Regular";
+  font-size: 1.4rem;
+  color: #35383E;
+  .status{
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  input {
+    display: flex;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 1.4rem;
+    border: 1px solid #728090;
+    background-color: #F6F8FC;
+    border-radius: 4px;
+
+    &.ng-valid.ng-touched {
+      border: 1px solid green;
+    }
+
+    &.ng-invalid.ng-touched {
+      border: 1px solid #F93D68;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 7px rgba(114, 128, 144, 0.6);
+    }
+  }
+}
+
+.table_dialog{
+  .buttons{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+  }
+}
+
+.toolbar_template{
+  display: flex;
+  align-items: center;
+  span{
+    color: #000000;
+    font-size: 1.6rem;
+    font-family: "Roboto Regular";
+    margin-right: 15px;
+  }
+  button{
+    outline: none;
+    border: 1px solid #5975CF;
+    background: #DEE3F5;
+    font-size: 1.4rem;
+    color: #5975CF;
+    padding: 8px 15px;
+    display: flex;
+    min-width: 155px;
+  }
+}
+
+.column_action{
+  display: flex;
+  position: relative;
+  button{
+    margin: 2px;
+    width: 30px;
+    height: 30px;
+    &:first-child { margin-left: 0; }
+    &:last-child { margin-right: 0; }
+  }
+  .btn_action {
+    outline: none;
+    border: 0;
+    cursor: auto;
+    pointer-events: none;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -8px;
+  }
+  padding-right: 20px;
+}
+
+

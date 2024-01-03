@@ -1,0 +1,116 @@
+<div class="edited_table" *ngIf="options">
+  <kendo-grid [data]="data" (save)="saveHandler($event)" (add)="addHandler($event)" (edit)="editHandler($event)"
+    (remove)="removeHandler($event)" (cancel)="cancelHandler($event)">
+    <ng-template kendoGridToolbarTemplate>
+      <div class="toolbar_template">
+        <span>Media Plan</span>
+        <button kendoGridAddCommand>
+          <kendo-svg-icon *ngIf="addNewIcon" [icon]="addNewIcon" />
+          Add New Row
+        </button>
+      </div>
+    </ng-template>
+    <kendo-grid-column field="media_channel" title="Media Channel" [width]="115">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
+        <div class="custom_dropdown_list">
+          <kendo-dropdownlist [formControl]="formGroup.get('media_channel')" [data]="options.channels" valueField="key"
+            textField="value" />
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem['media_channel'].value }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="audience_segment" title="Audience Segment" [width]="115">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
+        <div class="custom_dropdown_list">
+          <kendo-dropdownlist [formControl]="formGroup.get('audience_segment')" [data]="options.audience_segments"
+            valueField="key" textField="value" />
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem['audience_segment'].value }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="budget" title="Budget" [width]="115">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
+        <input type="text" mask="separator.2" thousandSeparator="," on-blur="addZeroBlur(formGroup, 'budget')"
+          [formControl]="formGroup.get('budget')" [leadZero]="true">
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem['budget'] | mask: 'separator.2': {thousandSeparator: ',', prefix: MASK_CURRENCY} }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="purchased_amount" title="Purchased Amount" [width]="115">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
+        <input type="text" mask="separator.2" thousandSeparator="," [prefix]="MASK_CURRENCY"
+          [formControl]="formGroup.get('purchased_amount')" on-blur="addZeroBlur(formGroup, 'purchased_amount')"
+          [leadZero]="true" readonly>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem['purchased_amount'] | mask: 'separator.2': {thousandSeparator: ',', prefix: MASK_CURRENCY} }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="actualized_amount" title="Actualized Amount" editor="text" [width]="115">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
+        <input type="text" mask="separator.2" thousandSeparator="," [prefix]="MASK_CURRENCY"
+          [formControl]="formGroup.get('actualized_amount')" on-blur="addZeroBlur(formGroup, 'actualized_amount')"
+          [leadZero]="true" readonly>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem['actualized_amount'] | mask: 'separator.2': {thousandSeparator: ',', prefix: MASK_CURRENCY} }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="media_plan_id" title="Media Plan ID" [width]="135">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
+        <input type="text" [value]="getMediaPlanId(formGroup.value) | strConvertMask: options.mask">
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ getMediaPlanId(dataItem) | strConvertMask: options.mask }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="status" title="Status" [width]="150">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
+        <div class="custom_dropdown_list">
+          <kendo-dropdownlist [formControl]="formGroup.get('status')" [data]="options.statuses" valueField="key"
+            textField="value" />
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <span class="status" [style]="getStatusColor(dataItem['status']['key'])">
+          {{ dataItem['status'].value }}
+        </span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-command-column title="Action" [width]="100">
+      <ng-template kendoGridCellTemplate let-isNew="isNew">
+        <div class="column_action">
+          <button kendoGridEditCommand [primary]="true">
+            <kendo-svg-icon *ngIf="editIcon" [icon]="editIcon" />
+          </button>
+          <button kendoGridRemoveCommand>
+            <kendo-svg-icon *ngIf="trashIcon" [icon]="trashIcon" />
+          </button>
+          <button kendoGridSaveCommand>
+            <kendo-svg-icon *ngIf="saveIcon" [icon]="saveIcon" />
+          </button>
+          <button kendoGridCancelCommand>
+            <kendo-svg-icon *ngIf="roundCancelIcon" [icon]="roundCancelIcon" />
+          </button>
+          <button *ngIf="!isNew" class="btn_action">
+            <kendo-svg-icon *ngIf="roundSuccessIcon" [icon]="roundSuccessIcon" style="color: #4EA079" />
+          </button>
+        </div>
+      </ng-template>
+    </kendo-grid-command-column>
+  </kendo-grid>
+</div>
+
+<adm-dialog class="table_dialog" [width]="270" [opened]="showTableDialog" (onClose)="showTableDialog = false">
+  <div header>Media Plan</div>
+  <p>Delete row ?</p>
+  <div class="buttons" footer>
+    <adm-button bg="red" prependIcon="trash" (onClick)="deleteRow()">Delete</adm-button>
+    <adm-button bg="orange" prependIcon="trash" (onClick)="closeTableDialog()">Cancel</adm-button>
+  </div>
+</adm-dialog>

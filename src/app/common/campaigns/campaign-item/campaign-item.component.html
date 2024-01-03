@@ -1,0 +1,40 @@
+<div class="campaign-item">
+  <div class="header" *ngIf="item">
+    <div class="left">
+      <span class="initial-marker" [class.recent]="campaignsType.value=== 'recent'"
+        [class.assigned]="campaignsType.value=== 'assigned'">CN</span>
+      <div class="title-group">
+        <span class="title">{{ item.name }}</span>
+        <span class="date">Date of update: {{ item.updated_at * 1000 | date: 'dd/MM/YYYY' }}</span>
+      </div>
+    </div>
+    <div class="right">
+      <span class="type" [class]="[item.status.color]">
+        {{ item.status.title }}
+      </span>
+    </div>
+  </div>
+  <ul class="body" [class.fat]="isFatStyle" *ngIf="item && item.items.length">
+    <li *ngFor="let element of sortedItems" [class.inactive]="!element.exist" (click)="navigateTo(element.link)">
+
+      <ng-container *ngIf="element.exist">
+        <a class="item-wrapper" [routerLink]="'..' + element.link">
+          <span class="body-title">{{ element.title }}</span>
+          <button class="btn arrow-icon">
+            <kendo-svg-icon [icon]="arrowIcon" />
+          </button>
+        </a>
+      </ng-container>
+
+      <ng-container *ngIf="!element.exist">
+        <div class="item-wrapper">
+          <span class="body-title">{{ element.title }}</span>
+          <button class="btn arrow-icon">
+            <kendo-svg-icon [icon]="arrowIcon" />
+          </button>
+        </div>
+      </ng-container>
+
+    </li>
+  </ul>
+</div>

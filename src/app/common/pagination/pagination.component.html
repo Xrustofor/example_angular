@@ -1,0 +1,45 @@
+<div class="pagination">
+  <kendo-datapager
+    [pageSize]="pageSize"
+    [skip]="skip"
+    [total]="total"
+    (pageChange)="onPageChange($event)"
+  >
+    <ng-template
+      kendoDataPagerTemplate
+      let-totalPages="totalPages"
+      let-currentPage="currentPage"
+    >
+      <div class="k-pager-numbers-wrap">
+        <button
+          type="button"
+          class="btn btn-pagination"
+          (click)="sendPre()"
+          [disabled]="!item || (item.current_page === 1) || loading"
+        >
+        <kendo-svg-icon
+          [icon]="getIcon('arrow-left')"
+          style="color: #888893"
+         />
+        </button>
+        <kendo-datapager-numeric-buttons
+          class="numeric-buttons"
+          [buttonCount]="buttonCount"
+          [attr.aria-disabled]="loading"
+        ></kendo-datapager-numeric-buttons>
+        <button
+          type="button"
+          class="btn btn-pagination"
+          (click)="sendNext()"
+          [disabled]="!item || (item.current_page === item.last_page) || loading"
+        >
+        <kendo-svg-icon
+        [icon]="getIcon('arrow-right')"
+        style="color: #888893"
+       />
+        </button>
+      </div>
+    </ng-template>
+  </kendo-datapager>
+</div>
+

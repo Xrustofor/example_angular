@@ -1,0 +1,169 @@
+.dialog-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  outline: 0;
+  padding: 15px;
+  z-index: 5;
+}
+
+.dialog-overlay {
+  outline: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+.dialog {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.window-overlay {
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.window-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  background: #ffffff;
+  border-radius: 8px;
+  min-width: 250px;
+  min-height: 150px;
+  z-index: 1;
+  width: 100%;
+}
+
+.window {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 5px;
+  height: 100%;
+  display: flex;
+  .body {
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+  }
+}
+
+.header {
+  color: #000000;
+  font-size: 1.9rem;
+  font-family: "Roboto Regular";
+}
+.content {
+  margin-top: 20px;
+  min-height: 50px;
+  color: #000000;
+  font-size: 1.4rem;
+  font-family: "Roboto Regular";
+  position: relative;
+}
+
+// Animations
+.dialog {
+  &.showAnimation {
+    animation: dialog-show 0.2s both normal;
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    z-index: 1;
+
+    @keyframes dialog-show {
+      0% {
+        transform: scale(0);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+  }
+
+  &.hideAnimation {
+    animation: dialog-hide 0.2s both normal;
+    animation-timing-function: cubic-bezier(0.1, -0.1, 0.5, -0.1);
+    z-index: 1;
+
+    @keyframes dialog-hide {
+      0% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(0);
+      }
+    }
+  }
+}
+
+.dialog-wrapper {
+  &.hide {
+    display: none;
+  }
+
+  &.show {
+    display: flex;
+    animation: dialog-overlay-show 0.2s both normal;
+
+    @keyframes dialog-overlay-show {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.showAnimation {
+    display: flex;
+    animation: dialog-overlay-show 0.2s both normal;
+
+    @keyframes dialog-overlay-show {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.hideAnimation {
+    display: flex;
+    animation: dialog-overlay-hide 0.2s both normal;
+    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+
+    @keyframes dialog-overlay-hide {
+      100% {
+        opacity: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<div class="home-wrap" [roleVisibility]="visibilityMap">
+  <div class="home-filters" data-view-role="HOME-FILTERS">
+    <adm-search-autocomplete data-view-role="AGENCY-NAME-FILTER" [width]="500" label="Agency"
+      placeholder="Search Agency Name" (onInput)="getAutocompleteAgency($event)" valueField="value"
+      [items]="inputAgency" [item]="inputAgencyName" [loading]="inputAgencyLoading"
+      (select)="getSomeCampaigns($event)" />
+    <adm-combobox [width]="500" label="Select Client" placeholder="Client Name" textField="value" valueField="value"
+      [loading]="true" [items]="inputClient" [item]="inputClientName" (select)="getSomeClient($event)"
+      (filterChange)="filterChangeClient($event)"></adm-combobox>
+  </div>
+
+  <div class="home-body three-columns">
+    <div class="block">
+      <adm-notifications class="full" [items]="messages" (onChoose)="chooseMessage($event)">
+        <adm-pagination [item]="metaPaginations" [buttonCount]="5" (onChange)="goNextMessages($event)"
+          [loading]="loading" />
+      </adm-notifications>
+    </div>
+    <div class="block two-columns">
+      <adm-campaigns style="width: 100%" [items]="assignedCampaign" [meta]="assignedCampaignMeta">
+        <div class="button flex-content-center pt-4 full">
+          <adm-button-link bg="red" link="../campaigns">
+            View All
+          </adm-button-link>
+        </div>
+      </adm-campaigns>
+    </div>
+  </div>
+</div>
+
+<adm-dialog [opened]="openedModal" (onClose)="closeModal()" [loading]="!oneMessage" [width]="500">
+  <span header>Notifications</span>
+  <adm-notifications-item *ngIf="oneMessage" [item]="oneMessage"></adm-notifications-item>
+</adm-dialog>

@@ -1,0 +1,14 @@
+<ul
+  class="a-sub-menu"
+  [class.show]="expand"
+  [@box]="show"
+  *ngIf="items"
+>
+  <li
+    class="a-sub-menu-item"
+    routerLinkActive="active"
+    *ngFor="let element of items"
+  >
+    <a [routerLink]="[element.url]">{{ element.text }}</a>
+  </li>
+</ul>

@@ -1,0 +1,28 @@
+<div class="dialog-wrapper" animate [animateToggle]="opened">
+
+  <div class="dialog" animate [animateToggle]="opened">
+    <div class="window-overlay">
+      <div class="window-wrapper" [style]="'maxWidth:'+ width + 'px'">
+        <div class="window">
+          <div class="body">
+            <div class="header">
+              <ng-content select="[header]"></ng-content>
+            </div>
+            <div class="content">
+              <!-- <adm-loader-logo [loading]="loading" [size]="'small'"> -->
+              <ng-content select="[content]"></ng-content>
+              <ng-content></ng-content>
+              <!-- </adm-loader-logo> -->
+            </div>
+            <div class="footer">
+              <ng-content select="[footer]"></ng-content>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dialog-overlay" (click)="close()"></div>
+
+</div>

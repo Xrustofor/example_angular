@@ -1,0 +1,76 @@
+<div class="manage-account" disabledForReadonlyMode>
+
+    <section class="form-groups">
+        <form class="general-information-form" [formGroup]="generalInformationForm">
+            <h4>General Information</h4>
+            <div class="rows">
+                <div class="row">
+                    <div class="adm-input-custom">
+                        <label for="last_name">Last Name <span class="require">*</span></label>
+                        <input id="last_name" [class.ng-invalid]="isInvalidGeneralInfoFormControl('last_name')"
+                            placeholder="Last Name" [formControlName]="'last_name'">
+                    </div>
+                    <div class="adm-input-custom">
+                        <label for="first_name">First Name <span class="require">*</span></label>
+                        <input id="first_name" [class.ng-invalid]="isInvalidGeneralInfoFormControl('first_name')"
+                            placeholder="First Name" [formControlName]="'first_name'">
+                    </div>
+                    <div class="adm-input-custom">
+                        <label for="title">Job Title <span class="require">*</span></label>
+                        <input id="title" [class.ng-invalid]="isInvalidGeneralInfoFormControl('title')"
+                            placeholder="Title" [formControlName]="'title'">
+                    </div>
+                    <div class="adm-input-custom">
+                        <label for="email">Email <span class="require">*</span></label>
+                        <input id="email" [class.ng-invalid]="isInvalidGeneralInfoFormControl('email')"
+                            placeholder="Email" [formControlName]="'email'">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="adm-input-custom">
+                        <label for="phone">Office Phone Number <span class="require">*</span></label>
+                        <input id="phone" type="text" [mask]="MASK_PHONE" [showMaskTyped]="true"
+                            [class.ng-invalid]="isInvalidGeneralInfoFormControl('phone')"
+                            placeholder="Office Phone Number" [formControlName]="'phone'" />
+                    </div>
+                    <div class="adm-input-custom">
+                        <label>Role</label>
+                        <adm-combobox [disabled]="true" [width]='240' placeholder="Role" [items]="roles"
+                            [item]="selectedRole" textField="role" valueField="value" />
+                    </div>
+                    <div class="adm-input-custom">
+                        <label>Status</label>
+                        <adm-combobox [disabled]="true" [width]='240' placeholder="Status" [items]="statuses"
+                            [item]="selectedStatus" textField="status" valueField="value" />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form class="new-password-form" [formGroup]="newPasswordForm" (ngSubmit)="resetPassword()">
+            <h4>Set New Password</h4>
+            <div class="rows">
+                <div class="row">
+                    <div class="adm-input-custom">
+                        <label for="password">Type New Password <span class="require">*</span></label>
+                        <input id="password" [class.ng-invalid]="isInvalidPasswordFormControl('password')"
+                            type="password" placeholder="New password" [formControlName]="'password'">
+                    </div>
+                    <div class="adm-input-custom">
+                        <label for="password_confirmation">Retype New Password <span class="require">*</span></label>
+                        <input id="password_confirmation"
+                            [class.ng-invalid]="isInvalidPasswordFormControl('mismatch_password')" type="password"
+                            placeholder="Retype New password" [formControlName]="'password_confirmation'">
+                    </div>
+                    <adm-button type="submit" class="reset-password-button" bg="blue"
+                        prependIcon="reset-password-lock">Reset Password</adm-button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <section class="footer">
+        <adm-button bg="green" prependIcon="roundSuccess" (onClick)="updateGeneralInformation()">Update</adm-button>
+        <adm-button bg="orange" prependIcon="roundCancel" (onClick)="goToDefaultPage()">Cancel</adm-button>
+    </section>
+
+</div>

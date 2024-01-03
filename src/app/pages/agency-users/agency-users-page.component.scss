@@ -1,0 +1,75 @@
+.agency_users {
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+
+  .btn {
+    height: 36px;
+    width: 36px;
+    border-radius: 6px;
+    margin: 2px;
+
+    &.review {
+      border: 1px solid #4ea079;
+    }
+    &.edit {
+      border: 1px solid #f1a33c;
+    }
+  }
+}
+
+.filters {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+
+  .row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+
+    &:not(:first-child) {
+      margin-top: 18px;
+    }
+
+    adm-search-autocomplete,
+    adm-combobox {
+      width: 100%;
+      max-width: 420px;
+    }
+  }
+}
+
+.action_buttons {
+  display: flex;
+  flex-wrap: wrap;
+  a {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    margin: 2px;
+    padding: 5px;
+    transition: linear 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  a:hover {
+    transition: linear 0.3s;
+    opacity: 0.7;
+  }
+  a.view {
+    border: 1px solid #4ea079;
+  }
+  a.edit {
+    border: 1px solid #f1b160;
+  }
+}
+
+.autocomplete {
+  min-width: 350px;
+}

@@ -1,0 +1,45 @@
+.a-sub-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow: hidden;
+  width: 100%;
+  opacity: 0;
+  padding-right: 10px;
+
+  &.show {
+    opacity: 1;
+  }
+
+  a {
+    color: #ffff;
+    width: 100%;
+    padding: 15px 10px;
+  }
+
+  .a-sub-menu-item {
+    display: flex;
+    opacity: 0.5;
+    border-radius: 4px;
+    margin-left: 45px;
+    padding-left: 5px;
+
+    &:first-child {
+      margin-top: 5px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      opacity: 1;
+      background-color: #35373c;
+    }
+
+    &.active {
+      opacity: 1;
+      background-color: #404246;
+    }
+  }
+}

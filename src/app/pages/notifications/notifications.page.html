@@ -1,0 +1,35 @@
+<div class="notifications-settings">
+    <h1>Notifications Settings</h1>
+    <div class="toggle-wrapper">
+        <form [formGroup]="settingsForm">
+            <ul formGroupName="toggles">
+                <li *ngFor="let toggle of togglesData">
+                    <kendo-svg-icon [icon]="getIcon(toggle.icon)" class="icon" />
+                    <kendo-label [text]="toggle.title">
+                        <kendo-switch disabledForReadonlyMode (valueChange)="showToast(toggle.title, toggle.meta)" [onLabel]="' '"
+                            [offLabel]="' '" size="small" [formControlName]="toggle.meta" />
+                    </kendo-label>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+<div class="notifications-wrapper" outsideClick (onOutsideClick)="blurNotification()">
+    <div class="column notification-list">
+        <adm-notifications class="full" [items]="notifications" [focusNotificationId]="selectedNotificationId"
+            (onChoose)="chooseNotification($event)">
+            <adm-pagination [item]="metaPaginations" [buttonCount]="5" (onChange)="goNextNotifications($event)"
+                [loading]="notificationListLoading" />
+        </adm-notifications>
+    </div>
+    <div class="column notification-view">
+        <!-- <adm-loader-logo [loading]="selectNotificationLoading"> -->
+        <div class="notification-wrapper">
+            <div class="notification-item" [class.show]="!selectNotificationLoading && selectedNotificationId">
+                <adm-notifications-item *ngIf="selectedNotification" [item]="selectedNotification" />
+                <p class="review-reply-btn">Review or Reply</p>
+            </div>
+        </div>
+        <!-- </adm-loader-logo> -->
+    </div>
+</div>

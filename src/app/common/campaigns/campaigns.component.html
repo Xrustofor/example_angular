@@ -1,0 +1,46 @@
+<div class="campaign-wrap" [roleVisibility]="visibilityMap">
+  <div class="campaign-header">
+    <div class="group-wrap">
+
+      <div class="campaigns-type-dropdown" data-view-role="CAMPAIGNS-TYPE-DROPDOWN">
+        <p>Type of Campaigns:</p>
+        <div class="adm-input-custom custom_dropdown_list">
+          <adm-tabs-slider [items]="compaignTypes" (onSelect)="onCampaignsTypeChanged($event)" />
+        </div>
+      </div>
+
+      <div class="capmaigns-type-title">
+        <span class="title blue" *ngIf="campaignTypeValue.value === 'recent'">
+          Recent Campaigns
+        </span>
+        <span class="title green" *ngIf="campaignTypeValue.value === 'assigned'">
+          Assigned Campaigns
+        </span>
+      </div>
+
+      <div data-view-role="CAMPAIGNS-ADD-BUTTON">
+        <adm-button-link bg="green" prependIcon="plus" link="../campaigns/add">
+          Add Campaign
+        </adm-button-link>
+      </div>
+    </div>
+
+    <span class="header-bottom" *ngIf="meta">Result: {{ meta.total }}</span>
+  </div>
+
+  <div class="campaign-columns">
+    <div class="campaign-body">
+      <div class="campaign-items-wrap">
+        <div class="campaign-items">
+          <adm-loader-skeleton [loading]="!items" [itemHeight]="'180px'" [count]="10" [gap]="'15px'"
+            [padding]="'0 15px 0 0'">
+            <adm-campaign-item *ngFor="let item of items" [item]="item" [isFatStyle]="true"
+              [campaignsType]="campaignTypeValue"></adm-campaign-item>
+          </adm-loader-skeleton>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-content></ng-content>
+</div>

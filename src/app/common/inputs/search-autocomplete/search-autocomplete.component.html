@@ -1,0 +1,32 @@
+<div class="search-input" [style.maxWidth]="width + 'px'">
+  <label>
+    <span *ngIf="label">{{label}}:</span>
+    <div class="input-wrap">
+      <kendo-autocomplete
+        #autocompleteList
+        adaptiveMode="auto"
+        #autocomplete
+        [data]="items"
+        [placeholder]="placeholder"
+        [valueField]="valueField"
+        [loading]="loading"
+        [value]="item"
+        [filterable]="true"
+        (closed)="close()"
+        [popupSettings]="{ popupClass: isPopup ? '' : 'search-input-popup-hidden' }"
+        (valueChange)="change($event)"
+      >
+        <ng-template>
+
+        </ng-template>
+      </kendo-autocomplete>
+      <button class="btn search-icon">
+          <kendo-svg-icon
+            class="search"
+            [icon]="searchIcon"
+           />
+      </button>
+    </div>
+  </label>
+</div>
+

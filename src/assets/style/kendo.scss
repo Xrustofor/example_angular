@@ -1,0 +1,341 @@
+span.adm-icon {
+  &-down-arrow.k-button-icon.k-icon {
+    border: 1px solid #728090;
+    border-top: 0;
+    border-left: 0;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    min-height: auto;
+    margin-bottom: 5px;
+  }
+  &-up-arrow.k-button-icon.k-icon {
+    border: 1px solid #728090;
+    border-bottom: 0;
+    border-right: 0;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    min-height: auto;
+    margin-top: 5px;
+  }
+}
+
+.search-input {
+  .k-input-solid {
+    &:focus-within {
+      box-shadow: 0 0 7px rgba(114, 128, 144, 0.6);
+    }
+  }
+}
+
+.combobox-input {
+  .k-input-solid {
+    &:focus-within {
+      box-shadow: 0 0 7px rgba(114, 128, 144, 0.6);
+    }
+  }
+  .k-input-button {
+    border-inline-start-width: 0;
+    &.k-button-solid-base {
+      border-color: transparent;
+      // color: transparent;
+      background-color: transparent;
+      background-image: none;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+.button-notification {
+  //toast
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin-right: 15px;
+  max-width: 300px;
+
+  .k-notification-content {
+    margin-top: 1px;
+  }
+}
+
+.grid-header-column-wrap {
+  vertical-align: middle !important;
+}
+
+.search-input-popup-hidden {
+  display: none;
+}
+
+.k-checkbox:checked,
+.k-checkbox.k-checked {
+  border-color: #0095e8;
+  color: white;
+  background-color: #0095e8;
+}
+
+.pagination_wrap {
+  width: 100%;
+}
+
+.grid-header {
+  width: 100%;
+  position: relative;
+  padding-right: 15px;
+  white-space: normal;
+  text-overflow: ellipsis;
+  .icon-sort {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -5px;
+    display: flex;
+    align-items: center;
+    .icon {
+      height: 12px;
+    }
+    .down-icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// toggle button
+.k-switch-on .k-switch-track {
+  background-color: #0095e8;
+  border-color: #0095e8;
+}
+.k-switch-off .k-switch-track {
+  background-color: #e7e9ec;
+  border-color: #e7e9ec;
+}
+.k-switch-on .k-switch-thumb,
+.k-switch-off .k-switch-thumb {
+  background-color: white;
+}
+.k-switch-on:focus .k-switch-track,
+.k-switch-on.k-focus .k-switch-track,
+.k-switch-off:focus .k-switch-track,
+.k-switch-off.k-focus .k-switch-track {
+  outline: none;
+}
+.k-switch-sm .k-switch-thumb {
+  width: 23px;
+  height: 23px;
+}
+
+/*
+k-picker-md
+k-rounded-md
+k-picker-solid
+k-dropdownlist
+k-picker
+ng-untouched
+ng-pristine
+ng-invalid
+
+ */
+
+.custom_dropdown_list {
+  position: relative;
+  color: #35383e;
+  kendo-dropdownlist {
+    position: relative;
+    height: 36px;
+    border: 1px solid #728090;
+    transition: 0.1s linear;
+    &:hover {
+    }
+    &:before {
+      content: "";
+      border: 1px solid #728090;
+      border-top: 0;
+      border-left: 0;
+      height: 10px;
+      transform: rotate(45deg);
+      min-height: auto;
+      margin-bottom: 5px;
+      position: absolute;
+      top: calc(50% - 8px);
+      bottom: 0;
+      right: 9px;
+      width: 10px;
+    }
+    &.k-focus {
+      box-shadow: 0 0 7px rgba(114, 128, 144, 0.6);
+    }
+    &.k-picker-solid {
+      background-color: #f6f8fc;
+    }
+    &[aria-expanded="true"].k-focus:before {
+      transform: rotate(225deg);
+      top: 15px;
+    }
+  }
+  button.k-button {
+    kendo-icon-wrapper {
+      display: none;
+    }
+  }
+}
+
+.custom_datepicker {
+  color: #35383e;
+
+  kendo-datepicker {
+    height: 36px;
+
+    &:not(.ng-invalid) {
+      border: 1px solid #728090;
+    }
+    &.k-input {
+      background-color: #f6f8fc;
+    }
+    &.k-focus {
+      box-shadow: 0 0 7px rgba(114, 128, 144, 0.6);
+    }
+    .k-input-button {
+      border-inline-start-width: 0;
+    }
+    kendo-svg-icon {
+      transition: 0.1s linear;
+    }
+    .k-button-solid-base {
+      background-color: #f6f8fc;
+    }
+    .k-button-solid-base:hover,
+    .k-button-solid-base.k-hover {
+      background-color: transparent;
+      kendo-svg-icon {
+        opacity: 0.7;
+        transition: 0.1s linear;
+      }
+    }
+  }
+}
+
+.custom_textarea {
+  color: #35383e;
+
+  kendo-textarea {
+    &:not(.ng-invalid) {
+      border: 1px solid #728090;
+    }
+    &.k-input {
+      background-color: #f6f8fc;
+    }
+    &.k-focus {
+      box-shadow: 0 0 7px rgba(114, 128, 144, 0.6);
+    }
+    .k-input-button {
+      border-inline-start-width: 0;
+    }
+  }
+}
+
+.k-grid-add-command {
+  transition: 0.2s linear;
+  &:hover {
+    opacity: 0.7;
+    transition: 0.2s linear;
+  }
+  .k-button-text {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.app_progressbar {
+  .progress_bar {
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #ffffff;
+    background-color: #f1b160;
+    background-image: linear-gradient(
+      45deg,
+      #d8d8d8 25%,
+      transparent 25%,
+      transparent 50%,
+      #d8d8d8 50%,
+      #d8d8d8 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: 22px 22px;
+    animation: kendo-progressbar-indeterminate-animation 1s linear infinite;
+  }
+
+  @keyframes progressbar-indeterminate-animation {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 22px 0;
+    }
+  }
+}
+
+.autocomplete-container-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  label {
+    color: #35383e;
+    font-size: 1.6rem;
+    font-family: "Roboto Regular";
+    margin-right: 20px;
+  }
+  .kendo-autocomplete-wrap {
+    position: relative;
+    .k-input-solid:focus-within {
+      border-color: #728090;
+      box-shadow: 0 0 7px rgba(114, 128, 144, 0.6);
+    }
+    .k-input-button {
+      border-inline-start-width: 0;
+      &.k-button-solid-base {
+        border-color: transparent;
+        background-color: transparent;
+        background-image: none;
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+    display: flex;
+    kendo-autocomplete {
+      outline: none;
+      border: 1px solid #728090;
+      border-radius: 4px;
+      padding: 3px 10px 3px 25px;
+      color: #728090;
+      font-family: "Roboto Regular";
+      font-size: 1.4rem;
+      background: #f6f8fc;
+      width: 100%;
+    }
+    .search-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 35px;
+    }
+  }
+}
+
+// table
+.k-grid td.k-selected,
+.k-grid .k-table-row.k-selected > td,
+.k-grid .k-table-td.k-selected,
+.k-grid .k-table-row.k-selected > .k-table-td {
+  background-color: #ebebeb;
+}

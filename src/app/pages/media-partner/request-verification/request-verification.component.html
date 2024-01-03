@@ -1,0 +1,109 @@
+<div class="request_verification">
+
+  <div class="top k-mb-7">
+    <p class="text">Select partners whose information hasn't been updated since</p>
+  </div>
+
+  <kendo-grid class="media_partner_grid" [kendoGridBinding]="data" kendoGridSelectBy="id" [resizable]="true"
+    [pageSize]="10" [pageable]="true">
+
+    <ng-template kendoGridToolbarTemplate>
+      <div class="toolbar_template k-py-3">
+
+        <div class="row k-mb-3">
+          <adm-button bg="green" prependIcon="fileSuccess" (onClick)="setRequestVerification()">
+            Request Verification
+          </adm-button>
+        </div>
+
+        <div class="row">
+          <adm-tabs-slider [items]="inputService.statuses" [activeTabIndex]="inputService.selectedStatusIndex"
+            [reverseKeyValue]="true" (onSelect)="inputService.filterChangeStatus($event)" />
+        </div>
+
+      </div>
+    </ng-template>
+
+    <kendo-grid-column *ngFor="let item of columns" [field]="item.field" [title]="item.title" [width]="item.width"
+      [columnMenu]="false" headerClass="grid-header-column-wrap">
+
+      <ng-template kendoGridHeaderTemplate let-column let-service="service" *ngIf="item.field === 'checkbox'">
+        <div class="checkbox_cell_header">
+          <button (click)="setAllcheckbox()">{{ column.title }}</button>
+        </div>
+      </ng-template>
+
+      <ng-template kendoGridHeaderTemplate let-column let-service="service" *ngIf="item.field !== 'action'">
+        <div class="grid-header" (click)="tableSortingService.sortChange(item.field)">
+          {{ column.title }}
+          <div class="icon-sort" *ngIf="item.sort">
+            <kendo-svg-icon [icon]="getIcon('upArrow')" size="medium" class="icon" [style.width]="'12px'"
+              [style.color]="'#728090'" [class.down-icon]="item.sort === -1" />
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'checkbox'">
+        <div class="custom_cell">
+          <input type="checkbox" size="large" kendoCheckBox [checked]="dataItem['checkbox']" />
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'media_kit_upload'">
+        <div class="custom_cell">
+          <adm-button br="red" color="red" prependIcon="download" (onClick)="download(item.field)" />
+          <p>{{ dataItem['media_kit_upload'] }}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'rate_card_upload'">
+        <div class="custom_cell">
+          <adm-button br="red" color="red" prependIcon="download" (onClick)="download(item.field)" />
+          <p>{{ dataItem['rate_card_upload'] }}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'w9_upload'">
+        <div class="custom_cell">
+          <adm-button br="red" color="red" prependIcon="download" (onClick)="download(item.field)" />
+          <p>{{ dataItem['w9_upload'] }}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'w9_upload'">
+        <div class="custom_cell">
+          <adm-button br="red" color="red" prependIcon="download" (onClick)="download(item.field)" />
+          <p>{{ dataItem['w9_upload'] }}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'website'">
+        <div class="custom_cell">
+          <adm-button-link br="blue" color="blue" prependIcon="link" [link]="'https://www.google.com'" />
+          <p class="ellipsis">{{ dataItem['website'] }}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'certification_upload'">
+        <div class="custom_cell">
+          <button class="custom_button_icon download"><kendo-svg-icon [icon]="getIcon('download')"
+              style="color: #C14862" /></button>
+          <p>{{ dataItem['certification_upload'] }}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'status' || item.field === 'do_status'">
+        <div class="custom_status_cell" [style]="statusColor[dataItem['status']['key']]">
+          <p>{{ dataItem['status']['value']}}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'action'">
+        <a class="custom_button_icon edit" [routerLink]="'../' + dataItem['uuid'] + '/edit'">
+          <kendo-svg-icon [icon]="getIcon('edit')" style="color: #F1B160" />
+        </a>
+      </ng-template>
+    </kendo-grid-column>
+
+    <ng-template kendoPagerTemplate>
+      <div class="pagination_wrap">
+        <!--        [item]="meta"-->
+        <!--        (onChange)="actionPagination($event)"-->
+        <!--        [loading]="loading"-->
+        <adm-pagination [buttonCount]="5" />
+      </div>
+    </ng-template>
+  </kendo-grid>
+</div>

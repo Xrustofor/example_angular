@@ -1,0 +1,70 @@
+.add-campaign {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 10px 60px 10px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  .block_group {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -8px;
+    margin-bottom: 30px;
+  }
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 0 8px;
+  min-width: 250px;
+}
+
+.adm-input-custom {
+  margin-bottom: 24px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  label {
+    margin-bottom: 8px;
+  }
+}
+
+.input_group {
+  display: flex;
+  margin: 0 -8px;
+  margin-bottom: 24px;
+  .group {
+    justify-content: space-between;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .adm-input-custom {
+    display: flex;
+    flex: 1;
+    margin: 0 8px;
+  }
+}
+
+input {
+  padding: 9px;
+  width: 100%;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  overflow: auto;
+}

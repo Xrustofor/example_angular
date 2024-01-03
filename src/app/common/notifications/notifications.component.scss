@@ -1,0 +1,66 @@
+.loading-container-wrap {
+  position: relative;
+}
+
+.notifications-wrap {
+  background: #f8fafb;
+  padding: 20px 2px 0px 5px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.notifications-header {
+  margin-bottom: 18px;
+  margin-left: 15px;
+
+  span {
+    font-family: "Roboto Regular";
+    font-weight: bold;
+    color: #1f2228;
+    font-size: 1.7rem;
+  }
+}
+
+.notifications-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.notifications-items-wrap {
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.notifications-items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-right: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .arrow-icon {
+    align-self: center;
+    border-radius: 4px;
+    padding: 12px;
+    opacity: 1;
+    box-sizing: border-box;
+
+    kendo-svg-icon {
+      color: #888893;
+      width: 7px;
+      height: 7px;
+    }
+  }
+}

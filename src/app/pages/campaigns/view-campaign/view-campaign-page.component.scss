@@ -1,0 +1,85 @@
+.view_campaign {
+  height: 100%;
+  margin: 0 10px;
+  padding-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  .header {
+    display: flex;
+    margin-bottom: 24px;
+  }
+}
+
+.body {
+  height: 100%;
+  margin: 0 8px;
+  display: flex;
+  flex-direction: column;
+  .body_list {
+    margin: 0 -8px;
+    margin-bottom: 20px;
+  }
+  .block_wrap {
+    display: flex;
+    flex: 1;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .block {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin: 0 8px 20px 0;
+    min-width: 250px;
+  }
+  .block_top,
+  .block_bottom {
+    padding: 10px 0;
+    font-family: "Roboto Regular";
+    font-weight: normal;
+    font-size: 1.4rem;
+  }
+  .block_bottom {
+    padding: 10px 12px;
+    background: rgba(246, 248, 252, 0.4);
+    border-radius: 4px;
+  }
+  .block_group {
+    margin: 0 -8px;
+    display: flex;
+    flex-wrap: wrap;
+    .block {
+      margin: 0 8px;
+      min-width: 125px;
+    }
+  }
+}
+
+span.required {
+  font-family: "Roboto Regular";
+  font-weight: normal;
+  font-size: 1.4rem;
+  color: #d86a62;
+}
+
+.action_button {
+  display: flex;
+  justify-content: center;
+}
+
+.table {
+  display: flex;
+  flex: 1;
+  margin: 0 -8px;
+}
+
+.toolbar_template {
+  display: flex;
+  align-items: center;
+  span {
+    color: #000000;
+    font-size: 1.6rem;
+    font-family: "Roboto Regular";
+    margin-right: 15px;
+  }
+}

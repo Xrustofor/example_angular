@@ -1,0 +1,46 @@
+<div class="a-drawer-container a-drawer-push" [class]="expand ? 'a-drawer-expanded' : 'a-drawer-mini'">
+  <div class="a-drawer a-drawer-start"
+    [style]="expand ? 'flex-basis:' + maxWidthDrawer + 'px' : 'flex-basis:' + minWidthDrawer + 'px'">
+    <div class="a-drawer-wrapper" [style]="expand ? 'width:' + maxWidthDrawer + 'px' : 'width:' + minWidthDrawer + 'px'">
+      <ul class="a-drawer-items">
+        <li class="a-drawer-item a-logo" [class]="[expand ? 'a-level-0' : '']">
+          <div class="a-icon-wrapper-host">
+            <div class="a-i-bell a-icon">
+              <div class="logo" [style.background-image]="'url(' + logoUrl+ ')'"></div>
+            </div>
+            <span class="name" *ngIf="expand">{{ agencyName }}</span>
+          </div>
+        </li>
+        <li class="a-drawer-item" [class.a-level-0]="expand" routerLinkActive="active" *ngFor="let item of items"
+          (click)="select(item.id)" [routerLink]="!item.items?.length ? item.url : null">
+          <div class="a-icon-wrapper-host" *ngIf="item.icon">
+            <div class="a-i-bell a-icon">
+              <a class="a-link" [routerLink]="[item.url]">
+                <kendo-svg-icon [icon]="getIcon(item.icon)" size="medium" />
+              </a>
+            </div>
+            <div class="a-item-text" *ngIf="expand">
+              <a class="a-link" [routerLink]="[item.url]">{{ item.text }}</a>
+              <span class="a-spacer"></span>
+              <button class="btn button-arrow" *ngIf="item.items?.length" (click)="actionSubMenu(item.id)">
+                <span [class]="showSubMenu ? 'arrow-top': 'arrow-down'"></span>
+              </button>
+            </div>
+          </div>
+          <adm-drawer-sub-menu class="sub-menu" *ngIf="item?.items?.length" [items]="item.items"
+            [show]="item.menuStatus?.value ? 'end' : 'start' " [class.show]="expand"
+            [style]="{ width: maxWidthDrawer + 'px' }"></adm-drawer-sub-menu>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+  <button class="button-arrow-left" (click)="actionMenuShow()" [style.left]="(expand ? maxWidthDrawer : minWidthDrawer ) -12 + 'px'">
+    <kendo-svg-icon [icon]="getIcon('arrow-left')" *ngIf="expand; else arrowRight" />
+    <ng-template #arrowRight>
+      <kendo-svg-icon [icon]="getIcon('arrow-right')" style="color: #C14862" />
+    </ng-template>
+  </button>
+</div>

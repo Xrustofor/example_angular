@@ -1,0 +1,142 @@
+<div class="view-proposal-request-layout" *ngIf="model">
+
+  <div class="edit-wrapper">
+    <adm-button-link bg="green" prependIcon="plus" link="add-request">
+      Add Campaign RFP
+    </adm-button-link>
+  </div>
+
+  <section class="general-information-view">
+    <div class="rows">
+      <div class="row">
+        <div class="adm-input-custom">
+          <label for="name">Agency</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ model.agency }}</p>
+          </div>
+        </div>
+        <div class="adm-input-custom combobox-input">
+          <label for="country_id">Client</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ model.client }}</p>
+          </div>
+        </div>
+        <div class="adm-input-custom">
+          <label for="state">Year</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ model.year }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="adm-input-custom">
+          <label for="street">Campaign Name</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ model.campaign }}</p>
+          </div>
+        </div>
+        <div class="adm-input-custom">
+          <label for="postal_code">Campaign Code</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ model.code }}</p>
+          </div>
+        </div>
+        <div class="adm-input-custom">
+          <label for="code">Campaign Start Date</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ model.start }}</p>
+          </div>
+        </div>
+        <div class="adm-input-custom">
+          <label for="code">Campaign End Date</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ model.end }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="adm-input-custom">
+          <label for="code">Status</label>
+          <div class="custom_status_cell" [style]="statusColor[model.status]">
+            <p>{{ model.status | capitalize }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="table-wrapper" *ngIf="model.rfps.list">
+    <div class="table-scroll">
+      <section class="client-contacts-view">
+        <kendo-grid [resizable]="true" [columnMenu]="false" [data]="model.rfps.list">
+
+          <kendo-grid-column field="name" title="RFP Name">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.name }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="id" title="RFP ID">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.id }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="media_outlet" title="Media Outlet">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom combobox-input">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.media_outlet }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="modified_date" title="Modified Date">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.modified_date }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="created_by" title="Created By">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.created_by }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="status" title="RFP Status">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom_status_cell" [style]="statusColor[dataItem['status']]">
+                  <p>{{ dataItem.status | capitalize }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column>
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom_buttons_box">
+                  <adm-button-link br="green" color="green" prependIcon="eye" />
+                  <adm-button-link br="orange" color="orange" prependIcon="edit" />
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+
+        </kendo-grid>
+      </section>
+    </div>
+  </section>
+</div>

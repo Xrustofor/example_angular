@@ -1,0 +1,27 @@
+.app_progressbar {
+  .k-progress-status-wrap.k-progress-end{
+    position: relative;
+    &::after {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      animation: loading 1s linear infinite;
+      background: linear-gradient(90deg, transparent, #fff, transparent);
+    }
+  }
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

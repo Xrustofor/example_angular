@@ -1,0 +1,168 @@
+<div class="view_campaign">
+  <div class="header">
+    <adm-button-link bg="orange" prependIcon="edit" [link]="'../../edit/' + IDCampaign">
+      Edit Campaign
+    </adm-button-link>
+  </div>
+
+  <div class="body">
+    <div class="body_list">
+      <div class="block_wrap">
+        <div class="block" *ngIf="agency">
+          <div class="block_top" *ngIf="agency.label">
+            {{ agency.label }} <span *ngIf="agency.require" class="required">*</span>
+          </div>
+          <div class="block_bottom" *ngIf="agency.value">{{ agency.value }}</div>
+        </div>
+
+        <div class="block" *ngIf="client">
+          <div class="block_top" *ngIf="client.label">{{ client.label }} <span *ngIf="client.require"
+              class="required">*</span></div>
+          <div class="block_bottom" *ngIf="client.value">{{ client.value }}</div>
+        </div>
+        <div class="block" *ngIf="campaign">
+          <div class="block_top" *ngIf="campaign.year">{{ campaign.year.label }} <span *ngIf="campaign.year.require"
+              class="required">*</span></div>
+          <div class="block_bottom" *ngIf="campaign.year">{{ campaign.year.value }}</div>
+        </div>
+      </div>
+      <div class="block_wrap">
+        <div class="block" *ngIf="campaign">
+          <div class="block_top" *ngIf="campaign.name">{{ campaign.name.label }} <span *ngIf="campaign.name.require"
+              class="required">*</span></div>
+          <div class="block_bottom">{{ campaign.name.value }}</div>
+        </div>
+        <div class="block" *ngIf="campaign">
+          <div class="block_group" *ngIf="campaign.code">
+            <div class="block">
+              <div class="block_top" *ngIf="campaign.code.label">
+                {{ campaign.code.label }} <span *ngIf="campaign.code.require" class="required">*</span>
+              </div>
+              <div class="block_bottom" *ngIf="campaign.code.value">{{ campaign.code.value }}</div>
+            </div>
+            <div class="block" *ngIf="campaign.start_date">
+              <div class="block_top" *ngIf="campaign.start_date.label">
+                {{ campaign.start_date.label }} <span *ngIf="campaign.start_date.require" class="required">*</span>
+              </div>
+              <div class="block_bottom" *ngIf="campaign.start_date.value">{{ campaign.start_date.value }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="block" *ngIf="campaign">
+          <div class="block_top" *ngIf="campaign.end_date?.label">{{ campaign.end_date.label }} <span
+              *ngIf="campaign.end_date.require" class="required">*</span></div>
+          <div class="block_bottom" *ngIf="campaign.end_date?.value">{{ campaign.end_date.value }}</div>
+        </div>
+      </div>
+      <div class="block_wrap">
+        <div class="block">
+          <div class="block_group" *ngIf="campaign">
+            <div class="block">
+              <div class="block_top" *ngIf="campaign?.budget?.label">
+                {{ campaign.budget.label }} <span *ngIf="campaign.budget.require" class="required">*</span>
+              </div>
+              <div class="block_bottom" *ngIf="campaign?.budget?.value">{{ campaign.budget.value }}</div>
+            </div>
+            <div class="block" *ngIf="campaign">
+              <div class="block_top" *ngIf="campaign?.purchased?.label">
+                {{ campaign.purchased.label }} <span *ngIf="campaign.purchased.require" class="required">*</span>
+              </div>
+              <div class="block_bottom" *ngIf="campaign.purchased.value">{{ campaign.purchased.value }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block_group" *ngIf="campaign">
+            <div class="block">
+              <div class="block_top" *ngIf="campaign?.actualized?.label">
+                {{ campaign.actualized.label }} <span *ngIf="campaign.actualized.require" class="required">*</span>
+              </div>
+              <div class="block_bottom" *ngIf="campaign?.actualized?.value">{{ campaign.actualized.value }}</div>
+            </div>
+            <div class="block" *ngIf="campaign">
+              <div class="block_top" *ngIf="campaign.status.label">
+                {{ campaign.status.label }} <span *ngIf="campaign.status.require" class="required">*</span>
+              </div>
+              <div class="custom_status_cell" [style]="statusColor[campaign.status.key]">
+                <p>{{ campaign.status.value }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="block" *ngIf="campaign">
+          <div class="block_top" *ngIf="campaign?.assign?.label">{{ campaign.assign.label }} <span
+              *ngIf="campaign.assign.require" class="required">*</span></div>
+          <div class="block_bottom" *ngIf="campaign?.assign?.value">{{ campaign.assign.value }}</div>
+        </div>
+      </div>
+      <div class="block_wrap">
+        <div class="block">
+          <div class="block_group" *ngIf="campaign">
+            <div class="block" *ngIf="campaign">
+              <div class="block_top" *ngIf="campaign.created_by.label">
+                {{ campaign.created_by.label }} <span *ngIf="campaign.created_by.require" class="required">*</span>
+              </div>
+              <div class="block_bottom" *ngIf="campaign.created_by.value">{{ campaign.created_by.value }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+    </div>
+    <div class="table">
+      <kendo-grid [kendoGridBinding]="items" kendoGridSelectBy="id" [resizable]="true" [pageSize]="10" [pageable]="true"
+        [columnMenu]="true"><ng-template kendoGridToolbarTemplate>
+          <div class="toolbar_template">
+            <span>Media Plan</span>
+          </div>
+        </ng-template>
+        <kendo-grid-column *ngFor="let item of columns" [field]="item.field" [title]="item.title" [width]="item.width"
+          [columnMenu]="false" headerClass="grid-header-column-wrap">
+          <ng-template kendoGridHeaderTemplate let-column let-service="service" *ngIf="item.field !== 'action'">
+            <div class="grid-header" (click)="tableSortingService.sortChange(item.field)">
+              {{ column.title }}
+              <div class="icon-sort" *ngIf="item.sort">
+                <kendo-svg-icon [icon]="getIcon('upArrow')" size="medium" class="icon" [style.width]="'12px'"
+                  [style.color]="'#728090'" [class.down-icon]="item.sort === -1" />
+              </div>
+            </div>
+          </ng-template>
+          <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'media_channel'">
+            {{ dataItem['media_channel'].value}}
+          </ng-template>
+          <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'audience_segment'">
+            {{ dataItem['audience_segment'].value}}
+          </ng-template>
+          <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'budget'">
+            {{ dataItem['budget'] | mask: 'separator.2': {thousandSeparator: ',', prefix: MASK_CURRENCY} }}
+          </ng-template>
+          <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'purchased'">
+            {{ dataItem['purchased_amount'] | mask: 'separator.2': {thousandSeparator: ',', prefix: MASK_CURRENCY} }}
+          </ng-template>
+          <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'actualized'">
+            {{ dataItem['actualized_amount'] | mask: 'separator.2': {thousandSeparator: ',', prefix: MASK_CURRENCY} }}
+          </ng-template>
+          <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'status'">
+            <div class="custom_status_cell" [style]="statusColor[dataItem['status']['key']]">
+              <p>{{ dataItem['status'].value }}</p>
+            </div>
+          </ng-template>
+          <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'action'">
+            <div class="action_button">
+              <adm-button br="green" color="green" prependIcon="eye" (onClick)="review(dataItem.id)">
+                View Media Plan
+              </adm-button>
+            </div>
+          </ng-template>
+        </kendo-grid-column>
+        <ng-template kendoPagerTemplate>
+          <div class="pagination_wrap">
+            <adm-pagination [item]="meta" [buttonCount]="5" (onChange)="urlQueryService.actionPagination($event)"
+              [loading]="loading" />
+          </div>
+        </ng-template>
+      </kendo-grid>
+    </div>
+  </div>
+</div>

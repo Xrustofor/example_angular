@@ -1,0 +1,65 @@
+<div class="view_agency_user">
+
+  <div class="top">
+    <adm-button-link bg="orange" prependIcon="edit" [link]="'../../edit/' + agencyUserID">
+      Edit Agency User
+    </adm-button-link>
+  </div>
+
+  <div class="body" *ngIf="data">
+    <ul class="ul_body">
+      <li class="li_body">
+        <ul class="ul_row">
+          <li>
+            <span class="title">Agency</span>
+            <span class="text">{{ data.name }}</span>
+          </li>
+          <li>
+            <span class="title">Last Name</span>
+            <span class="text">{{ data.last_name }}</span>
+          </li>
+          <li>
+            <span class="title">First Name</span>
+            <span class="text">{{ data.first_name }}</span>
+          </li>
+          <li>
+            <span class="title">Title</span>
+            <span class="text">{{ data.position }}</span>
+          </li>
+        </ul>
+      </li>
+
+      <li class="li_body">
+        <ul class="ul_row">
+          <li>
+            <span class="title">Email</span>
+            <span class="text">{{ data.email }}</span>
+          </li>
+          <li>
+            <span class="title">Phone Number</span>
+            <span class="text">{{ data.phone | mask:MASK_PHONE }}</span>
+          </li>
+          <li>
+            <span class="title">Role</span>
+            <span class="text">{{ getItem(data.role.key, data.role.list).value }}</span>
+          </li>
+          <li>
+            <span class="title">Status</span>
+            <span class="text">{{ getItem(data.status.key, data.status.list).value }}</span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="title_ul_list" *ngIf="clients.length">
+      <span class="title">Clients</span>
+      <ul *ngIf="clients">
+        <li>Client</li>
+        <li *ngFor="let item of clients">
+          {{ item.value }}
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,58 @@
+.campaigns-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.review,
+.delete {
+  height: 36px;
+  width: 36px;
+  border-radius: 6px;
+  margin: 2px;
+}
+
+.review {
+  border: 1px solid #4ea079;
+}
+
+.delete {
+  border: 1px solid #d86a62;
+}
+
+.dialog-remove-title {
+  text-align: center;
+}
+
+.dialog-remove-content {
+  text-align: center;
+}
+
+.dialog-remove-footer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.filters {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+
+  .row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+
+    &:not(:first-child) {
+      margin-top: 18px;
+    }
+
+    adm-search-autocomplete,
+    adm-combobox {
+      width: 100%;
+      max-width: 420px;
+    }
+  }
+}

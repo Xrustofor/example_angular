@@ -1,0 +1,52 @@
+.pagination {
+  padding-top: 15px;
+  kendo-datapager {
+    background: #f8fafb;
+    border: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  kendo-datapager-numeric-buttons::ng-deep {
+    .k-pager-numbers {
+      gap: 3px;
+    }
+
+    .k-button {
+      border-radius: 4px;
+
+      &.k-selected {
+        background-color: transparent !important;
+        opacity: 1;
+        &::before {
+          border: 1px solid #728090;
+          background: transparent;
+          opacity: 1;
+        }
+      }
+    }
+    .k-button-flat-primary {
+      color: #1f2228;
+      .k-button-text {
+        color: #1f2228;
+        font-size: 1.4rem;
+        font-family: "Roboto Regular";
+      }
+    }
+  }
+}
+
+.numeric-buttons {
+  &[aria-disabled="true"] {
+    pointer-events: none;
+  }
+}
+
+.btn-pagination {
+  margin: 0 12px;
+  padding: 0 10px;
+  &:disabled {
+    opacity: 0.5;
+    cursor: auto;
+  }
+}

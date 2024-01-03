@@ -1,0 +1,12 @@
+<ul class="tabs" #tabsContainer *ngIf="items">
+  <li 
+    class="tab active_hover" [class.active]="currentTabIndex === i"
+    *ngFor="let item of items; let i = index"
+    (click)="selectTab(i)">{{ reverseKeyValue ? item.value : item.key }}
+  </li>
+
+  <span class="indicator"
+    [style.width.px]="indicatorWidth" 
+    [style.transform]="'translateX(' + indicatorPosition + 'px)'">
+  </span>
+</ul>

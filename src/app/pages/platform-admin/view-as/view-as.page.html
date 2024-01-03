@@ -1,0 +1,26 @@
+<div class="view-as" [class.animateDisplay]="isAnimateShowDisplay" disabledForReadonlyMode animate
+    [animateToggle]="isAnimateHideDisplay">
+
+    <form class="view-as-form" [formGroup]="viewAsForm">
+        <div class="row">
+            <div class="adm-input-custom custom_dropdown_list">
+                <label>View As <span class="require">*</span></label>
+                <kendo-dropdownlist formControlName="viewAs" [data]="companyTypes" valueField="key" textField="value"
+                    [valuePrimitive]="true" (valueChange)="onChangeCompanyType()" />
+            </div>
+            <div class="adm-input-custom custom_dropdown_list">
+                <label>Name <span class="require">*</span></label>
+                <kendo-dropdownlist formControlName="role" [data]="companies" valueField="key" textField="value"
+                    [valuePrimitive]="true" (valueChange)="onChangeCompany()" />
+            </div>
+            <div class="adm-input-custom custom_dropdown_list">
+                <label>User <span class="require">*</span></label>
+                <kendo-dropdownlist formControlName="user" [data]="userList" valueField="key" textField="value"
+                    [valuePrimitive]="true" />
+            </div>
+        </div>
+    </form>
+
+    <adm-button [disabled]="!canClickDemonstrateButton" bg="blue" prependIcon="glasses_button"
+        (onClick)="activateSpectatorMode()">Demonstrate</adm-button>
+</div>

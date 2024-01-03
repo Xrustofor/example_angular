@@ -1,0 +1,73 @@
+<div class="agency_users">
+  <kendo-grid [kendoGridBinding]="items" kendoGridSelectBy="id" [resizable]="true" [pageSize]="10" [pageable]="true"
+    [columnMenu]="true">
+    <ng-template kendoGridToolbarTemplate>
+      <div class="filters">
+        <div class="row top">
+
+          <div class="row top">
+            <adm-search-autocomplete label="Agency User" [width]="420" placeholder="Search Agency User"
+              valueField="value" (onInput)="inputService.uploadAgencyUsers($event)"
+              [items]="inputService.inputAgencyUser" [item]="inputService.inputAgencyUserName"
+              [loading]="inputService.inputAgencyUserLoading" (select)="urlQueryService.getAgencyUser($event)" />
+
+            <div class="custom_status_box" data-view-role="FILTER-BUTTON">
+              <p>Status:</p>
+              <adm-tabs-slider [items]="inputService.statuses" [activeTabIndex]="inputService.selectedStatusIndex"
+                (onSelect)="inputService.filterChangeStatus($event)" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row bottom">
+          <adm-button-link bg="green" prependIcon="plus" link="./add">
+            Add Agency User
+          </adm-button-link>
+        </div>
+      </div>
+
+    </ng-template>
+    <ng-template kendoGridNoRecordsTemplate>
+      <adm-loader-skeleton [loading]="loading" [itemHeight]="'54px'" [hostHeight]="'580px'" [count]="10" [gap]="'5px'"
+        [padding]="'5px'" />
+    </ng-template>
+    <kendo-grid-column *ngFor="let item of columns" [field]="item.field" [title]="item.title" [width]="item.width"
+      [columnMenu]="false" headerClass="grid-header-column-wrap">
+      <ng-template kendoGridHeaderTemplate let-column *ngIf="item.field !== 'action'">
+        <div class="grid-header" (click)="tableSortingService.sortChange(item.field)">
+          {{ column.title }}
+          <div class="icon-sort" *ngIf="item.sort">
+            <kendo-svg-icon [icon]="getIcon('upArrow')" size="medium" class="icon" [style.width]="'12px'"
+              [style.color]="'#728090'" [class.down-icon]="item.sort === -1" />
+          </div>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'phone'">
+        <span *ngIf="dataItem['phone']">{{ dataItem['phone'] | mask:MASK_PHONE }}</span>
+      </ng-template>
+
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'status'">
+        <div class="custom_status_cell" [style]="statusColor[dataItem['status']['key']]">
+          <p>{{ dataItem['status']['value']}}</p>
+        </div>
+      </ng-template>
+
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'action'">
+        <div class="action_buttons">
+          <a class="action_button view" [routerLink]="'view/' + dataItem['uuid']">
+            <kendo-svg-icon [icon]="getIcon('eye')" style="color: #4EA079" />
+          </a>
+          <a class="action_button edit" [routerLink]="'edit/' + dataItem['uuid']">
+            <kendo-svg-icon [icon]="getIcon('edit')" style="color: #F1B160" />
+          </a>
+        </div>
+      </ng-template>
+    </kendo-grid-column>
+    <ng-template kendoPagerTemplate>
+      <div class="pagination_wrap">
+        <adm-pagination [item]="meta" [buttonCount]="5" (onChange)="urlQueryService.actionPagination($event)"
+          [loading]="loading" />
+      </div>
+    </ng-template>
+  </kendo-grid>
+</div>

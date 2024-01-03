@@ -1,0 +1,116 @@
+:host {
+    display: flex;
+    padding: 10px;
+}
+
+.notifications-settings {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    width: 100%;
+
+    > h1 {
+        font-weight: 600;
+        font-size: 1.7rem;
+    }
+
+    .toggle-wrapper {
+        margin-top: 20px;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            li {
+                display: flex;
+                align-items: center;
+
+                .icon {
+                    color: #c2cbdc;
+                }
+
+                kendo-label {
+                    display: flex;
+                    align-items: center;
+                    font-weight: 400;
+                    font-size: 1.3rem;
+                    line-height: 15px;
+                    color: #1f2228;
+                    margin-left: 10px;
+
+                    kendo-switch {
+                        margin-left: 50px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.notifications-wrapper {
+    display: flex;
+    width: 100%;
+    background-color: #f8fafb;
+    border: 1px solid #eceef0;
+    border-radius: 4px;
+    overflow: hidden;
+
+    > .column {
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+
+    .notification-list {
+        display: flex;
+        width: 500px;
+        height: 100%;
+        z-index: 2;
+    }
+
+    .notification-view {
+        position: relative;
+        display: flex;
+        border-left: 1px solid #eceef0;
+        flex-direction: column;
+        height: 100%;
+
+        .notification-wrapper {
+            position: absolute;
+            display: flex;
+            padding: 58px 5px 10px 5px;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+
+            .notification-item {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                transform: translateX(-3px);
+                opacity: 0;
+                transition: 0.2s;
+
+                &.show {
+                    transform: translateX(0px);
+                    margin-left: 0px;
+                    opacity: 1;
+                }
+
+                .review-reply-btn {
+                    color: #1fa2ea;
+                    font-size: 14px;
+                    margin-left: 45px;
+                    cursor: pointer;
+
+                    &:hover {
+                        text-decoration-line: underline;
+                    }
+                }
+            }
+        }
+    }
+}

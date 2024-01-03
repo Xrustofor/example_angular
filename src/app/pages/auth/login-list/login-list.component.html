@@ -1,0 +1,16 @@
+<div class="login-list">
+  <ul [class.selected]="isSelected">
+    <li class="header">
+      <span>Roles</span>
+      <strong>Emails</strong>
+    </li>
+    <li
+      *ngFor="let item of items" (click)="selected(item.id)"
+      [class.disabled]="item.disabled" 
+    >
+      <span>{{item.value}}:</span><strong>{{item.email}}</strong>
+    </li>
+  </ul>
+
+  <span class="linux-sticker"></span>
+</div>

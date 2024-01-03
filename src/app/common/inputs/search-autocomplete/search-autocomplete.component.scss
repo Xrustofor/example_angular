@@ -1,0 +1,46 @@
+.search-input{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 300px;
+  kendo-autocomplete{
+    outline: none;
+    border: 1px solid #728090;
+    border-radius: 4px;
+    padding: 3px 15px 3px 35px;
+    color: #728090;
+    font-family: "Roboto Regular";
+    font-size: 1.4rem;
+    background: #F6F8FC;
+    width: 100%;
+  }
+}
+
+
+label{
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  width: 100%;
+  span{
+    color: #35383E;
+    font-size: 1.6rem;
+    font-family: "Roboto Regular";
+    margin-right: 20px;
+  }
+}
+.input-wrap{
+  position: relative;
+  display: flex;
+  flex: 1;
+  .search-icon{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}

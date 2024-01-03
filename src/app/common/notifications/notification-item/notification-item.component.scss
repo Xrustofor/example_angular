@@ -1,0 +1,46 @@
+.notifications-item {
+  display: flex;
+  gap: 5px;
+  min-width: 250px;
+  font-family: "Roboto Regular";
+  position: relative;
+  border-radius: 4px;
+  padding: 10px 15px;
+  transition: 0.04s;
+
+  &.selectable:hover {
+    cursor: pointer;
+    background-color: #f2f4f5;
+  }
+  &.selectable.focused {
+    background-color: #ebedee;
+  }
+  .icon-block {
+    width: 30px;
+    margin-top: 2px;
+    padding-right: 10px;
+  }
+  .item-block {
+    display: flex;
+    flex-direction: column;
+  }
+  .item-title {
+    font-size: 1.7rem;
+    color: #1f2228;
+    margin-bottom: 8px;
+  }
+  .item-date {
+    font-size: 1.4rem;
+    color: #728090;
+    margin-bottom: 8px;
+  }
+  .item-text {
+    font-size: 1.3rem;
+    color: #1f2228;
+    margin: 0;
+  }
+}
+.item-block {
+  display: flex;
+  padding-right: 30px;
+}

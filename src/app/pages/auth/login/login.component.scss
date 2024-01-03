@@ -1,0 +1,64 @@
+.login-wrap{
+  min-height: 100vh;
+  display: flex;
+  .login{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    .form-wrap{
+      padding: 25px;
+    }
+  }
+
+  .form-wrap{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    position: relative;
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .form-group{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title {
+    color: #F93D68;
+    font-family: "Mulish";
+    font-weight: bold;
+    font-size: 2.4rem;
+    margin-bottom: 32px;
+  }
+
+  button{
+    outline: none;
+    border: 0;
+    padding: 10px 35px;
+    background: #C14862;
+    color: #ffffff;
+    max-width: 135px;
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 15px;
+    &[disabled]{
+      opacity: .4;
+      cursor: auto;
+    }
+  }
+  .button{
+    text-align: center;
+    display: flex;
+  }
+}

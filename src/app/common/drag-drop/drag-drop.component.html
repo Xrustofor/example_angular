@@ -1,0 +1,30 @@
+<div class="drag-drop-container">
+
+    <div class="drag-drop-wrapper">
+        <div class="drag-drop" [class.dragenter]="isDragEnter" (click)="openFileDialog()"
+            (dragenter)="onDragEnter($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+            (drop)="onDrop($event)">
+
+            <div class="content">
+                <kendo-svg-icon [icon]="getIcon(icon)" class="icon" />
+                <p>{{ title }}</p>
+            </div>
+
+            <input #fileInput type="file" (change)="onFilesSelect($event)" [accept]="acceptFileExtensions" multiple>
+        </div>
+    </div>
+
+    <div class="attachment-list-wrapper">
+        <ul class="attachment-list" *ngIf="items.length">
+            <li *ngFor="let file of items" animate [animateToggle]="isAttachmentVisible(file.name)">
+                <h4 class="extension-text">.{{ file.extension }}</h4>
+                <div class="data-info">
+                    <p>{{ file.name }}</p>
+                    <span>{{ file.date | formatDate: dateFormat }} ({{ convertBytesToMb(file.size) }} Mb)</span>
+                </div>
+                <span class="remove" (click)="removeAttachment(file.name)">✖</span>
+            </li>
+        </ul>
+    </div>
+
+</div>

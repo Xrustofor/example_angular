@@ -1,0 +1,7 @@
+<div class="loading-container-wrap">
+  <div animate [animateToggle]="loading" class="loading-container">
+    <img class="spinner" [style.width]="width" [style.height]="height" [src]="getUrl('icons/png', 'logo.png')">
+  </div>
+  <ng-content></ng-content>
+</div>
+

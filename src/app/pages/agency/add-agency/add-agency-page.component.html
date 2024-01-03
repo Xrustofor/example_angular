@@ -1,0 +1,180 @@
+<div class="add-agency-layout" disabledForReadonlyMode>
+
+  <section class="form-groups">
+    <form class="general-information-form" [formGroup]="generalInformationForm">
+      <h4>General Information</h4>
+      <div class="rows">
+        <div class="row">
+          <div class="adm-input-custom">
+            <label for="name">Agency Name <span class="require">*</span></label>
+            <input id="name" [class.ng-invalid]="isInvalidGeneralInfoFormControl('name')" placeholder="Agency Name"
+              [formControlName]="'name'">
+          </div>
+          <div class="adm-input-custom combobox-input">
+            <label for="country_id">Country <span class="require">*</span></label>
+            <kendo-combobox placeholder="Select Country" [data]="countries" textField="value" valueField="key"
+              [valuePrimitive]="true" [formControlName]="'country_id'"
+              [class.ng-invalid]="isInvalidGeneralInfoFormControl('country_id')" />
+          </div>
+          <div class="adm-input-custom">
+            <label for="state">State</label>
+            <input id="state" [class.ng-invalid]="isInvalidGeneralInfoFormControl('state')" placeholder="State"
+              [formControlName]="'state'">
+          </div>
+          <div class="adm-input-custom">
+            <label for="city">City <span class="require">*</span></label>
+            <input id="city" [class.ng-invalid]="isInvalidGeneralInfoFormControl('city')" placeholder="City"
+              [formControlName]="'city'">
+          </div>
+        </div>
+        <div class="row">
+          <div class="adm-input-custom">
+            <label for="street">Street Address <span class="require">*</span></label>
+            <input id="street" [class.ng-invalid]="isInvalidGeneralInfoFormControl('street')"
+              placeholder="Street Address" [formControlName]="'street'">
+          </div>
+          <div class="adm-input-custom">
+            <label for="postal_code">Zip Code <span class="require">*</span></label>
+            <input id="postal_code" [class.ng-invalid]="isInvalidGeneralInfoFormControl('postal_code')"
+              placeholder="Zip Code" [formControlName]="'postal_code'">
+          </div>
+          <div class="adm-input-custom">
+            <label for="code">Agency Code <span class="require">*</span></label>
+            <input id="code" [class.ng-invalid]="isInvalidGeneralInfoFormControl('code')" placeholder="Agency Code"
+              [formControlName]="'code'">
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <form class="main-agency-contact-form" [formGroup]="mainAgencyContactForm">
+      <h4>Main Agency Contact</h4>
+      <div class="rows">
+        <div class="row">
+          <div class="adm-input-custom">
+            <label for="last_name">Last Name <span class="require">*</span></label>
+            <input id="last_name" [class.ng-invalid]="isInvalidMainAgencyContactFormControl('last_name')"
+              placeholder="Last Name" [formControlName]="'last_name'">
+          </div>
+          <div class="adm-input-custom">
+            <label for="first_name">First Name <span class="require">*</span></label>
+            <input id="first_name" [class.ng-invalid]="isInvalidMainAgencyContactFormControl('first_name')"
+              placeholder="First Name" [formControlName]="'first_name'">
+          </div>
+          <div class="adm-input-custom">
+            <label>Job Title <span class="require">*</span></label>
+            <input id="position" [class.ng-invalid]="isInvalidMainAgencyContactFormControl('position')"
+              placeholder="Job Title" [formControlName]="'position'">
+          </div>
+          <div class="adm-input-custom">
+            <label for="email">Contact Email <span class="require">*</span></label>
+            <input id="email" [class.ng-invalid]="isInvalidMainAgencyContactFormControl('email')"
+              placeholder="Contact Email" [formControlName]="'email'">
+          </div>
+        </div>
+        <div class="row">
+          <div class="adm-input-custom">
+            <label for="phone">Contact Phone <span class="require">*</span></label>
+            <input id="phone" type="text" [mask]="MASK_PHONE" [showMaskTyped]="true"
+              [class.ng-invalid]="isInvalidMainAgencyContactFormControl('phone')" placeholder="Contact Phone"
+              [formControlName]="'phone'" />
+          </div>
+          <div class="adm-input-custom combobox-input">
+            <label>Role</label>
+            <adm-combobox [disabled]="true" [width]='190' placeholder="Role" [items]="mainAgencyRoles" textField="value"
+              valueField="key" [item]="selectedMainAgencyRole" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section class="other-contacts">
+    <h4>Other Contacts</h4>
+    <adm-button bg="lightblue" br="blue" color="blue" prependIcon="addNew" (onClick)="addNewRow()">
+      Add New Row
+    </adm-button>
+  </section>
+
+  <section class="table-wrapper">
+    <div class="table-scroll">
+      <form class="other-contacts-form" [formGroup]="otherContactsForm">
+        <kendo-grid [resizable]="false" [columnMenu]="false" [data]="contactItems.controls" [contentEditable]="false">
+
+          <kendo-grid-column field="last_name" title="Last Name">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <input id="last_name" [formControl]="dataItem.get('last_name')" placeholder="Last Name"
+                  [class.ng-invalid]="isInvalidOtherContactsFormControl(dataItem, 'last_name')">
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="first_name" title="First Name">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <input id="first_name" [formControl]="dataItem.get('first_name')" placeholder="First Name"
+                  [class.ng-invalid]="isInvalidOtherContactsFormControl(dataItem, 'first_name')">
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="position" title="Job Title">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom combobox-input">
+                <input id="position" [formControl]="dataItem.get('position')" placeholder="Job Title"
+                  [class.ng-invalid]="isInvalidOtherContactsFormControl(dataItem, 'position')">
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="email" title="Email">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <input id="email" [formControl]="dataItem.get('email')" placeholder="Email"
+                  [class.ng-invalid]="isInvalidOtherContactsFormControl(dataItem, 'email')">
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="phone" title="Phone">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <input id="phone" [formControl]="dataItem.get('phone')" placeholder="Phone"
+                  [class.ng-invalid]="isInvalidOtherContactsFormControl(dataItem, 'phone')" [mask]="MASK_PHONE"
+                  [showMaskTyped]="true" />
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="role" title="Role">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom custom_dropdown_list">
+                <kendo-dropdownlist [formControl]="dataItem.get('role')" [data]="roles" valueField="key"
+                  textField="value" [valuePrimitive]="true"
+                  [class.ng-invalid]="isInvalidOtherContactsFormControl(dataItem, 'role')" />
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="status" title="Status">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom custom_dropdown_list">
+                <kendo-dropdownlist [formControl]="dataItem.get('status')" [data]="statuses" valueField="key"
+                  textField="value" [valuePrimitive]="true"
+                  [class.ng-invalid]="isInvalidOtherContactsFormControl(dataItem, 'status')" />
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="action" title="Action">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+              <div class="buttons">
+                <adm-button br="red" color="red" prependIcon="trash" (onClick)="actionDelete(dataItem.id)" />
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+
+        </kendo-grid>
+      </form>
+    </div>
+  </section>
+
+  <div class="footer">
+    <adm-button bg="green" prependIcon="roundSuccess" (onClick)="submitAddAgency()">Add Agency</adm-button>
+    <adm-button bg="orange" prependIcon="roundCancel" (onClick)="goBack()">Cancel</adm-button>
+  </div>
+</div>

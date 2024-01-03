@@ -1,0 +1,20 @@
+<div class="notifications-wrap">
+  <div class="notifications-header">
+    <span>Notifications</span>
+  </div>
+  <div class="notifications-body">
+    <div class="notifications-items-wrap">
+      <div class="notifications-items">
+        <adm-loader-skeleton [loading]="items === null" [itemHeight]="'110px'" [count]="10" [gap]="'5px'" [padding]="'0 5px 0 0'">
+          <adm-notifications-item [focused]="notification.uuid == focusNotificationId" [selectable]="true"
+            *ngFor="let notification of items" [item]="notification" (onChoose)="onChoose.emit(notification.uuid)">
+            <button class="btn arrow-icon">
+              <kendo-svg-icon [icon]="getIcon('arrowRight')" />
+            </button>
+          </adm-notifications-item>
+        </adm-loader-skeleton>
+      </div>
+    </div>
+  </div>
+  <ng-content></ng-content>
+</div>

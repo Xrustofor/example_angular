@@ -1,0 +1,61 @@
+:host {
+    display: flex;
+    padding: 10px;
+    padding-bottom: 60px;
+}
+
+.manage-account {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .form-groups {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        height: 100%;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            > h4 {
+                font-weight: 400;
+                font-size: 1.6rem;
+            }
+
+            .rows {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+
+                .adm-input-custom {
+                    width: 350px;
+
+                    adm-combobox {
+                        width: 100%;
+                    }
+                }
+
+                .reset-password-button {
+                    align-self: flex-end;
+                }
+            }
+
+            &.general-information {
+                .row {
+                    .adm-input-custom:nth-child(2) {
+                        width: 240px;
+                    }
+                }
+            }
+        }
+    }
+}

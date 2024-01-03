@@ -1,0 +1,117 @@
+<div class="view-client-layout" *ngIf="client">
+
+  <div class="edit-wrapper">
+    <adm-button-link bg="orange" prependIcon="edit" [link]="'../../edit/' + client.uuid">
+      Edit Client
+    </adm-button-link>
+  </div>
+
+  <section class="general-information-view">
+    <h4>General Information</h4>
+    <div class="rows">
+      <div class="row">
+        <div class="adm-input-custom">
+          <label for="name">Client</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ client.client }}</p>
+          </div>
+        </div>
+        <div class="adm-input-custom combobox-input">
+          <label for="country_id">Country</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ client.country.value }}</p>
+          </div>
+        </div>
+        <div class="adm-input-custom">
+          <label for="state">State</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ client.state }}</p>
+          </div>
+        </div>
+        <div class="adm-input-custom">
+          <label for="city">City</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ client.city }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="adm-input-custom">
+          <label for="street">Street Address</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ client.street }}</p>
+          </div>
+        </div>
+        <div class="adm-input-custom">
+          <label for="postal_code">Zip Code</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ client.postal_code }}</p>
+          </div>
+        </div>
+        <div class="adm-input-custom">
+          <label for="code">Client Code</label>
+          <div class="custom-view-data-wrapper">
+            <p>{{ client.code }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="table-wrapper">
+    <div class="table-scroll">
+      <h4>Client Contacts</h4>
+
+      <section class="client-contacts-view">
+        <kendo-grid [resizable]="true" [columnMenu]="false" [data]="client.contacts">
+
+          <kendo-grid-column field="last_name" title="Last Name">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.last_name }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="first_name" title="First Name">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.first_name }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="position" title="Job Title">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom combobox-input">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.position }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="email" title="Contact Email">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.email }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="phone" title="Contact Phone">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.phone | mask: MASK_PHONE }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+        </kendo-grid>
+      </section>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,284 @@
+@import "./input.scss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 10px;
+  font-family: Roboto Regular;
+  font-style: normal;
+}
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.a-spacer {
+  display: flex;
+  flex: 1;
+  width: 100%;
+}
+
+.under-dev {
+  display: contents;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  &:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-image: url("../icons/png/under-dev.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 500px;
+    opacity: 0.5;
+  }
+}
+
+.container,
+.container-fluid,
+.container-xxl,
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container-sm,
+  .container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .container-md,
+  .container-sm,
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  .container-xxl,
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container {
+    max-width: 1320px;
+  }
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  opacity: 0.7;
+  transition: 0.3s opacity;
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+    transition: 0.3s opacity;
+  }
+}
+
+.full {
+  width: 100%;
+}
+
+.d-flex {
+  display: flex;
+}
+.alight-center {
+  align-items: center;
+}
+.flex-content-center {
+  display: flex;
+  justify-content: center;
+}
+
+.pt-1 {
+  padding-top: 3px;
+}
+.pt-2 {
+  padding-top: 6px;
+}
+.pt-3 {
+  padding-top: 9px;
+}
+.pt-4 {
+  padding-top: 12px;
+}
+
+.mb-1 {
+  margin-bottom: 3px;
+}
+.mb-2 {
+  margin-bottom: 6px;
+}
+.mb-3 {
+  margin-bottom: 9px;
+}
+.mb-4 {
+  margin-bottom: 12px;
+}
+
+.px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.full {
+  width: 100%;
+}
+
+router-outlet + .ng-star-inserted {
+  width: 100%;
+  height: 100%;
+}
+
+.adm-input-custom {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0;
+
+  input {
+    padding: 9px;
+  }
+
+  &:not(.no-validate) {
+    input {
+      &.ng-invalid {
+        border: 1px solid #f93d68;
+      }
+    }
+  }
+}
+
+.custom_buttons_box {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+}
+
+.custom_status_cell {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  line-height: normal;
+  width: fit-content;
+  font-size: 14px;
+}
+
+.custom_cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a,
+  button {
+    min-width: 36px;
+    margin: 5px;
+  }
+  p {
+    flex: 1;
+    min-width: 130px;
+  }
+  .ellipsis {
+    min-width: auto;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+}
+
+.custom-view-data-wrapper {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  background-color: #f6f8fc;
+  height: 36px;
+  border-radius: 4px;
+
+  p {
+    font-size: 1.4rem;
+  }
+
+  &.cell {
+    background-color: transparent;
+  }
+}
+
+.custom_status_box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  > p {
+    font-size: 1.6rem;
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  bottom: 0;
+  position: fixed;
+  background-color: white;
+  height: 60px;
+  width: 100%;
+  left: inherit;
+  z-index: 5;
+}

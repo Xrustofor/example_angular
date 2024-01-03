@@ -1,0 +1,12 @@
+<div class="bread-crumbs">
+  <ul>
+    <li *ngFor="let breadcrumb of (breadcrumbs$ | async)" class="active_hover">
+      <a [routerLink]="[breadcrumb.url]">
+        <div class="icon" *ngIf="breadcrumb.icon">
+          <kendo-svg-icon [icon]="getIcon(breadcrumb.icon)" />
+        </div>
+        {{ breadcrumb.label }}
+      </a>
+    </li>
+  </ul>
+</div>

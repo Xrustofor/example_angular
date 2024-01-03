@@ -1,0 +1,17 @@
+<div class="notifications-item" [class.selectable]="selectable" [class.focused]="focused" (click)="onChoose.emit()">
+  <div class="icon-block">
+    <button class="btn">
+      <container-element [ngSwitch]="item.type">
+        <kendo-svg-icon *ngSwitchCase="'bell'" [icon]="getIcon('bell')" style="color: #C2CBDC" />
+        <kendo-svg-icon *ngSwitchCase="'message'" [icon]="getIcon('message')" />
+        <kendo-svg-icon *ngSwitchCase="'user'" [icon]="getIcon('user')" />
+      </container-element>
+    </button>
+  </div>
+  <div class="item-block">
+    <span class="item-title">{{ item.title }}</span>
+    <span class="item-date">{{ item.date * 1000 | date: 'MM/dd/yyyy' }}</span>
+    <p class="item-text">{{ item.text }}</p>
+  </div>
+  <ng-content></ng-content>
+</div>

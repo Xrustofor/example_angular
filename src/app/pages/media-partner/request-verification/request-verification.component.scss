@@ -1,0 +1,35 @@
+.request_verification{
+
+}
+
+.top{
+  p {
+    font-family: "Roboto";
+    font-weight: normal;
+    font-size: 1.6rem;
+  }
+}
+.toolbar_template{
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox_cell_header{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button{
+    outline: none;
+    border: solid 1px #0095E8;
+    background: transparent;
+    padding: 5px 15px;
+    border-radius: 4px;
+    color: #0095E8;
+    cursor: pointer;
+    &:hover{
+      opacity: .7;
+      transition: .3s linear;
+    }
+  }
+}

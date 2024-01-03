@@ -1,0 +1,29 @@
+<div class="combobox-input" [style.maxWidth]="width + 'px'">
+  <div class="input-wrap">
+    <label>
+      <span *ngIf="label">{{label}}:</span>
+      <!-- valid !== null ? 'success' : 'invalid' -->
+      <kendo-combobox
+        [data]="items"
+        [textField]="textField"
+        [valueField]="valueField"
+        [value]="item"
+        [valuePrimitive]="valuePrimitive"
+        [clearButton]="true"
+        [className]="isValid"
+        adaptiveMode="auto"
+        (opened)="opened()"
+        (closed)="closed()"
+        [iconClass]="'adm-icon-'+ classIcon"
+        [placeholder]="placeholder"
+        (selectionChange)="select.emit($event)"
+        [filterInput]="true"
+        [filterable]="true"
+        [disabled]="disabled"
+        (filterChange)="filterChange.emit($event)"
+      />
+    </label>
+  </div>
+
+
+</div>

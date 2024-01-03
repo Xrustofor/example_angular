@@ -1,0 +1,191 @@
+<div class="add-proposal-request-layout" disabledForReadonlyMode>
+
+    <section class="form-groups">
+        <form class="general-information-form" [formGroup]="generalInformationForm">
+            <h4>RFP Information</h4>
+            <div class="rows">
+                <div class="row">
+                    <div class="adm-input-custom">
+                        <label for="name">RFP Name <span class="require">*</span></label>
+                        <input id="name" [class.ng-invalid]="isInvalidGeneralInfoFormControl('name')"
+                            placeholder="RFP Name" [formControlName]="'name'">
+                    </div>
+                    <div class="adm-input-custom combobox-input">
+                        <label for="id">RFP ID</label>
+                        <div class="custom-view-data-wrapper">
+                            <p>123</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form class="campaign-information-form" [formGroup]="campaignInformationForm">
+            <h4>Campaign Information</h4>
+            <div class="rows">
+                <div class="row">
+                    <div class="adm-input-custom">
+                        <label for="agency">Agency</label>
+                        <div class="custom-view-data-wrapper">
+                            <p>Test Agency</p>
+                        </div>
+                    </div>
+                    <div class="adm-input-custom">
+                        <label for="client">Client <span class="require">*</span></label>
+                        <input id="client" [class.ng-invalid]="isInvalidCampaignInformationFormControl('client')"
+                            placeholder="Client Name" [formControlName]="'client'">
+                    </div>
+                    <div class="adm-input-custom">
+                        <label for="campaign">Campaign <span class="require">*</span></label>
+                        <input id="campaign" [class.ng-invalid]="isInvalidCampaignInformationFormControl('campaign')"
+                            placeholder="Campaign Name" [formControlName]="'campaign'">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="adm-input-custom">
+                        <label>Campaign Start Date <span class="require">*</span></label>
+                        <div class="custom_datepicker">
+                            <kendo-datepicker formControlName="start" [(value)]="dateStart"
+                                [class.ng-invalid]="isInvalidCampaignInformationFormControl('start')" />
+                        </div>
+                    </div>
+                    <div class="adm-input-custom">
+                        <label>Campaign End Date <span class="require">*</span></label>
+                        <div class="custom_datepicker">
+                            <kendo-datepicker formControlName="end" [(value)]="dateEnd"
+                                [class.ng-invalid]="isInvalidCampaignInformationFormControl('end')" />
+                        </div>
+                    </div>
+                    <div class="adm-input-custom combobox-input">
+                        <label>Target Audience <span class="require">*</span></label>
+                        <kendo-combobox placeholder="Target Audience" [data]="countries" textField="value"
+                            valueField="key" [valuePrimitive]="true" [formControlName]="'country_id'"
+                            [class.ng-invalid]="isInvalidCampaignInformationFormControl('country_id')" />
+                    </div>
+                    <div class="adm-input-custom combobox-input">
+                        <label>Media Channel <span class="require">*</span></label>
+                        <kendo-combobox placeholder="Media Channel" [data]="mediaChannels" textField="value"
+                            valueField="key" [valuePrimitive]="true" [formControlName]="'media_channel'"
+                            [class.ng-invalid]="isInvalidCampaignInformationFormControl('media_channel')" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="adm-input-custom">
+                        <label>About the Campaign <span class="require">*</span></label>
+                        <div class="custom_textarea">
+                            <kendo-textarea formControlName="about" [rows]="4" placeholder="Type Text" resizable="both"
+                                [class.ng-invalid]="isInvalidCampaignInformationFormControl('about')"></kendo-textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="adm-input-custom">
+                        <label>Strategy <span class="require">*</span></label>
+                        <div class="custom_textarea">
+                            <kendo-textarea formControlName="strategy" [rows]="4" placeholder="Type Text"
+                                resizable="both"
+                                [class.ng-invalid]="isInvalidCampaignInformationFormControl('strategy')"></kendo-textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="adm-input-custom">
+                        <label>Deadline <span class="require">*</span></label>
+                        <div class="custom_datepicker">
+                            <kendo-datepicker formControlName="deadline" [(value)]="deadlineDate"
+                                [class.ng-invalid]="isInvalidCampaignInformationFormControl('deadline')" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form class="campaign-information-form" [formGroup]="campaignInformationForm">
+            <h4>Attachment</h4>
+            <div class="attachment-list-content">
+                <adm-drag-drop title="Drop Attachments here" icon="download"
+                    [acceptFileExtensions]="MASK_AVAILABLE_UPLOAD_FILE_TYPES"
+                    (attached)="onAttachmentsSelected($event)" />
+            </div>
+        </form>
+    </section>
+
+    <section class="media-rfp-list">
+        <h4>Media RFP List</h4>
+        <adm-button bg="lightred" br="red" color="red" prependIcon="plus" (onClick)="addRowMediaOutlet()">
+            Add Media Outlet
+        </adm-button>
+    </section>
+
+    <section class="table-wrapper">
+        <div class="table-scroll">
+            <form class="other-contacts-form" [formGroup]="mediaOutletForm">
+                <kendo-grid [resizable]="false" [columnMenu]="false" [data]="mediaOutletItems.controls"
+                    [contentEditable]="false">
+
+                    <kendo-grid-column field="media_outlet" title="Media Outlet">
+                        <ng-template kendoGridCellTemplate let-dataItem>
+                            <div class="adm-input-custom">
+                                <input id="media_outlet" [formControl]="dataItem.get('media_outlet')"
+                                    placeholder="Media Outlet Name"
+                                    [class.ng-invalid]="isInvalidFormControl(dataItem, 'media_outlet')">
+                            </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column field="contact_name" title="Contact Name">
+                        <ng-template kendoGridCellTemplate let-dataItem>
+                            <div class="adm-input-custom custom_dropdown_list">
+                                <kendo-dropdownlist [formControl]="dataItem.get('contact_name')" [data]="contactNames"
+                                    valueField="value" textField="key" [valuePrimitive]="true"
+                                    [class.ng-invalid]="isInvalidFormControl(dataItem, 'contact_name')" />
+                            </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column field="position" title="Contact Position">
+                        <ng-template kendoGridCellTemplate let-dataItem>
+                            <div class="adm-input-custom">
+                                <input id="position" [formControl]="dataItem.get('position')"
+                                    placeholder="Contact Position"
+                                    [class.ng-invalid]="isInvalidFormControl(dataItem, 'position')">
+                            </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column field="email" title="Contact Email">
+                        <ng-template kendoGridCellTemplate let-dataItem>
+                            <div class="adm-input-custom combobox-input">
+                                <input id="email" [formControl]="dataItem.get('email')" placeholder="Contact Email"
+                                    [class.ng-invalid]="isInvalidFormControl(dataItem, 'email')">
+                            </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column field="budget_amount" title="Budget Amount (optional)">
+                        <ng-template kendoGridCellTemplate let-dataItem let-formGroup="formGroup">
+                            <div class="adm-input-custom">
+                                <input id="budget_amount" [formControl]="dataItem.get('budget_amount')"
+                                    placeholder="Budget Amount"
+                                    [class.ng-invalid]="isInvalidFormControl(dataItem, 'budget_amount')"
+                                    mask="separator.2" thousandSeparator="," [leadZero]="true"
+                                    on-blur="addZeroBlur(dataItem, 'budget_amount')">
+                            </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column field="action" title="Action">
+                        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                            <div class="buttons">
+                                <adm-button br="red" color="red" prependIcon="trash"
+                                    (onClick)="removeRowMediaOutlet(rowIndex)" />
+                            </div>
+                        </ng-template>
+                    </kendo-grid-column>
+
+                </kendo-grid>
+            </form>
+        </div>
+    </section>
+
+    <div class="footer">
+        <adm-button bg="blue" prependIcon="paperPlane" (onClick)="sendRFP()">Send RFP</adm-button>
+        <adm-button bg="green" prependIcon="roundSuccess" (onClick)="goBack()">Save RFP</adm-button>
+        <adm-button bg="orange" prependIcon="roundCancel" (onClick)="goBack()">Cancel</adm-button>
+    </div>
+</div>

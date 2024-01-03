@@ -1,0 +1,64 @@
+<form disabledForReadonlyMode class="add_agency_users" (submit)="submit()" *ngIf="form" [formGroup]="form">
+  <div class="header">
+    <div class="row">
+      <div class="adm-input-custom large_small no-validate">
+        <label for="last_name">Last Name <span class="require">*</span></label>
+        <input id="last_name" placeholder="Last Name" formControlName="last_name">
+      </div>
+      <div class="adm-input-custom large_small no-validate">
+        <label for="first_name">First Name <span class="require">*</span></label>
+        <input id="first_name" placeholder="First Name" formControlName="first_name">
+      </div>
+      <div class="adm-input-custom large_small no-validate">
+        <label for="title">Job Title <span class="require">*</span></label>
+        <input id="title" placeholder="Title" formControlName="position_id">
+      </div>
+      <div class="adm-input-custom large_small no-validate">
+        <label for="email">Email <span class="require">*</span></label>
+        <input id="email" placeholder="Email" formControlName="email">
+      </div>
+    </div>
+    <div class="row">
+      <div class="adm-input-custom large_small no-validate">
+        <label for="phone">Phone Number <span class="require">*</span></label>
+        <input id="phone" placeholder="Phone Number" formControlName="phone" [mask]="MASK_PHONE" [showMaskTyped]="true">
+      </div>
+      <div class="custom_dropdown_list adm-input-custom large_small">
+        <label>Role <span class="require">*</span></label>
+        <kendo-dropdownlist textField="value" valueField="key" [data]="roleList"
+          formControlName="role" />
+      </div>
+      <div class="custom_dropdown_list adm-input-custom large_small">
+        <label>Status <span class="require">*</span></label>
+        <kendo-dropdownlist [data]="statusList" textField="value" valueField="key"
+          formControlName="status" />
+      </div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="body_title_button">
+      <span class="title">Clients</span>
+    </div>
+    <div class="body_list">
+      <div class="body_list_title_button">
+        <span>Client</span>
+        <adm-button br="blue" color="blue" prependIcon="addNew" (onClick)="addNew()" />
+      </div>
+      <ul class="list" formArrayName="clients" *ngIf="clientsForm.value.length">
+        <li *ngFor="let control of clientsForm.controls; let idx = index" [formGroupName]="idx">
+          <div class="custom_dropdown_list">
+            <kendo-dropdownlist [itemDisabled]="clientListDisabled.bind({clientsForm})" [data]="assignedList"
+              textField="value" valueField="key" formControlName="client" [style.width]="'218px'" />
+          </div>
+          <div class="right">
+            <adm-button color="red" prependIcon="roundCancel" [disabled]="loading" (onClick)="removeClient(idx)" />
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer">
+    <adm-button bg="green" prependIcon="roundSuccess" type="submit">Save</adm-button>
+    <adm-button bg="orange" prependIcon="roundCancel" (onClick)="location.back()">Cancel</adm-button>
+  </div>
+</form>

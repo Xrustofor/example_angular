@@ -1,0 +1,152 @@
+<div class="manage_codes" disabledForReadonlyMode>
+
+  <ng-container *ngIf="form">
+    <form class="manage_codes_form" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="body">
+        <div class="column_wrap">
+          <div class="column_wrap_header"></div>
+          <div class="column">
+            <div class="column_header">
+              <strong>Data Level</strong>
+            </div>
+            <div class="column_body">
+              <div class="column_block">
+                <ul class="list">
+                  <li *ngFor="let item of dataLevel; index as i">
+                    <div class="list_text">
+                      <span>Level {{ i + 1 }}</span>
+                      <span>{{ item.value }}</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column_wrap">
+          <div class="column_wrap_header">
+            <button type="button" class="column_header_button" (click)="addNew('media_channel')">
+              <kendo-svg-icon [icon]="getIcon('addNew')" style="color: #5975CF; stroke: #5975CF" />
+              <span>Add New</span>
+            </button>
+          </div>
+          <div class="column">
+            <div class="column_header">
+              <strong>Media Channel</strong>
+              <strong>Code</strong>
+            </div>
+            <div class="column_body">
+              <div class="column_block">
+                <ul class="list" formGroupName="media_channel" *ngIf="media_channel.controls.length; else mediaChannel">
+                  <li *ngFor="let control of media_channel.controls; let idx = index">
+                    <div class="list_input_group" [formGroupName]="idx">
+                      <input class="input_left adm-input-simple" formControlName="name">
+                      <input class="input_right adm-input-simple" formControlName="code">
+                      <button class="input_button" type="button" (click)="deleteField('media_channel', idx)">
+                        <kendo-svg-icon [icon]="getIcon('trash')" style="color: #D86A62" />
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+                <ng-template #mediaChannel>
+                  <adm-loader-logo [loading]="true"></adm-loader-logo>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column_wrap">
+          <div class="column_wrap_header">
+            <button class="column_header_button" (click)="addNew('target_audience')" type="button">
+              <kendo-svg-icon [icon]="getIcon('addNew')" style="color: #5975CF; stroke: #5975CF" />
+              <span>Add New</span>
+            </button>
+          </div>
+          <div class="column">
+            <div class="column_header">
+              <strong>Target Audience</strong>
+              <strong>Code</strong>
+            </div>
+            <div class="column_body">
+              <div class="column_block">
+
+                <ul class="list" formGroupName="target_audience"
+                  *ngIf="target_audience.controls.length; else targetAudience">
+                  <li *ngFor="let control of target_audience.controls; let idx = index">
+                    <div class="list_input_group" [formGroupName]="idx">
+                      <input class="input_left adm-input-simple" formControlName="name">
+                      <input class="input_right adm-input-simple" formControlName="code">
+                      <button class="input_button" type="button" (click)="deleteField('target_audience', idx)">
+                        <kendo-svg-icon [icon]="getIcon('trash')" style="color: #D86A62" />
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+                <ng-template #targetAudience>
+                  <adm-loader-logo [loading]="true"></adm-loader-logo>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column_wrap">
+          <div class="column none_border">
+            <div class="column_body">
+              <div class="column_block px-0">
+                <ul class="list">
+                  <li>
+                    <div class="list_text_checkbox">
+                      <h3>{{ TYPE_FIELD['media_codes'] }}</h3>
+                      <ul class="list" formGroupName="media_codes" *ngIf="media_codes.controls.length; else mediaCodes">
+                        <li *ngFor="let control of media_codes.controls; let idx = index" [formGroupName]="idx">
+                          <span>{{ idx + 1 + ' ' + control.value.code }}</span>
+                          <input type="checkbox" size="large" kendoCheckBox formControlName="active" />
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list_text_checkbox">
+                      <h3>{{ TYPE_FIELD['io_codes'] }}</h3>
+                      <ul class="list" formGroupName="io_codes">
+                        <li *ngFor="let control of io_codes.controls; let idx = index" [formGroupName]="idx">
+                          <span>{{ idx + 1 + ' ' + control.value.code }}</span>
+                          <input type="checkbox" size="large" kendoCheckBox formControlName="active" />
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+                <ng-template #mediaCodes>
+                  <adm-loader-logo [loading]="true"></adm-loader-logo>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <adm-button class="footer_button" bg="green" prependIcon="roundSuccess" type="submit">Save</adm-button>
+        <adm-button class="footer_button" bg="orange" prependIcon="roundCancel" type="button"
+          (onClick)="reset()">Cancel</adm-button>
+      </div>
+
+    </form>
+  </ng-container>
+</div>
+
+
+<adm-dialog class="dialog_remove" [width]="340" [opened]="showDialog" (onClose)="resetSelectedData()">
+  <div class="dialog-remove-title" header>Delete field with {{ selected?.title }}</div>
+  <div class="dialog-remove-content">
+    <p class="mb-3">Are you sure you want to delete field ({{ selected?.name }}) with code: {{ selected?.code }} </p>
+  </div>
+  <div class="dialog-remove-footer" footer>
+    <adm-button bg="red" prependIcon="trash" (onClick)="deleteItem()">Delete</adm-button>
+    <adm-button bg="orange" prependIcon="roundCancel" (onClick)="resetSelectedData()">Cancel</adm-button>
+  </div>
+</adm-dialog>

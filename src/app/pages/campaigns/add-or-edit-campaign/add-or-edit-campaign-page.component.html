@@ -1,0 +1,131 @@
+<div class="add-campaign" disabledForReadonlyMode>
+  <ng-container *ngIf="form">
+    <form class="manage_codes_form" [formGroup]="form">
+      <div class="header">
+        <div class="block_group">
+          <div class="block">
+            <div class="adm-input-custom group">
+              <label>Agency <span class="require">*</span></label>
+              <div class="custom_dropdown_list">
+                <kendo-dropdownlist formControlName="agency" [data]="item?.agency?.list" valueField="key"
+                  textField="value" />
+              </div>
+            </div>
+            <div class="adm-input-custom group no-validate">
+              <label for="campaign">Campaign Name <span class="require">*</span></label>
+              <input id="campaign" placeholder="Campaign Name" formControlName="name" />
+            </div>
+            <div class="input_group group">
+              <div class="adm-input-custom group no-validate">
+                <label for="budget_amount">Budget Amount ($) <span class="require">*</span></label>
+                <input id="budget_amount" type="text" placeholder="Amount" formControlName="budget" mask="separator.2"
+                  thousandSeparator="," on-blur="addZeroBlur('budget')" [leadZero]="true" />
+              </div>
+              <div class="adm-input-custom group">
+                <label for="purchased_amount">Purchased Amount ($)</label>
+                <input id="purchased_amount" placeholder="Amount" formControlName="purchased_amount" mask="separator.2"
+                  thousandSeparator="," on-blur="addZeroBlur('purchased_amount')" [leadZero]="true"
+                  [readonly]="!this.editedCompanyID" />
+              </div>
+            </div>
+            <div class="input_group group">
+              <div class="adm-input-custom group">
+
+                <div class="adm-input-custom group">
+                  <label for="purchased_amount">Created By</label>
+                  <input id="created_by" formControlName="created_by" readonly />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="block">
+            <div class="adm-input-custom group">
+              <label>Client <span class="require">*</span></label>
+              <div class="custom_dropdown_list">
+                <kendo-dropdownlist formControlName="client" [data]="item?.client?.list" valueField="key"
+                  textField="value" />
+              </div>
+            </div>
+            <div class="input_group group">
+              <div class="adm-input-custom group no-validate">
+                <label for="campaign_code">Campaign Code <span class="require">*</span></label>
+                <input id="campaign_code" placeholder="Campaign Code" formControlName="code" />
+              </div>
+              <div class="adm-input-custom group">
+                <label for="budget_amount">Campaign Start Due <span class="require">*</span></label>
+                <div class="custom_datepicker">
+                  <kendo-datepicker formControlName="start_date" [(value)]="dateStart" />
+                </div>
+              </div>
+            </div>
+            <div class="input_group">
+              <div class="adm-input-custom group">
+                <label for="actualized_amount">Actualized Amount ($)</label>
+                <input id="actualized_amount" placeholder="Amount" formControlName="actualized_amount"
+                  mask="separator.2" thousandSeparator="," on-blur="addZeroBlur('actualized')"
+                  [readonly]="!this.editedCompanyID" />
+              </div>
+              <div class="adm-input-custom group">
+                <label for="budget_amount">Status</label>
+                <div class="custom_dropdown_list">
+                  <kendo-dropdownlist formControlName="status" [textField]="'value'" [valueField]="'key'"
+                    [data]="item?.campaign?.status?.list" [itemDisabled]="statusListDisabled" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="block">
+            <div class="adm-input-custom group">
+              <label>Year <span class="require">*</span></label>
+              <div class="custom_dropdown_list">
+                <kendo-dropdownlist formControlName="year" [data]="years" />
+              </div>
+            </div>
+            <div class="adm-input-custom group">
+              <label>Campaign End Due <span class="require">*</span></label>
+              <div class="custom_datepicker">
+                <kendo-datepicker formControlName="end_date" [(value)]="dateEnd" />
+              </div>
+            </div>
+            <div class="adm-input-custom group">
+              <label>Assign Member</label>
+              <div class="custom_dropdown_list">
+                <kendo-dropdownlist formControlName="supervisor_uuid" textField="value" valueField="key"
+                  [data]="item?.campaign?.assign?.list" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+  <div class="body">
+    <adm-campaign-edited-table [options]="mediaPlanOptions" [(ngModel)]="mediaPlan"
+      (actionCreateRow)="form.markAllAsTouched()" [externalRequiredFields]="form.valid"
+      [campaignPlanId]="geFieldForMediaPlanId()" />
+  </div>
+
+  <div class="footer">
+    <adm-button bg="green" prependIcon="roundSuccess" type="button" (onClick)="submit()">Save</adm-button>
+    <adm-button bg="orange" prependIcon="roundCancel" (onClick)="location.back()">Cancel</adm-button>
+    <!--
+    <adm-button
+     
+      bg="#D86A62"
+      br="#D86A62"
+      color="#FFFFFF"
+      prependIcon="trash"
+      width="100"
+    >Delete</adm-button>
+    <adm-button
+     
+      bg="#F9EDEF"
+      br="#D86A62"
+      color="#D86A62"
+      prependIcon="trash"
+      width="100"
+    >Closed</adm-button>
+    -->
+  </div>
+
+</div>

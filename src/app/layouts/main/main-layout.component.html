@@ -1,0 +1,17 @@
+<div class="main-layout-wrap">
+  <adm-spectator-top-banner />
+  <adm-progressbar></adm-progressbar>
+  <adm-header></adm-header>
+  <adm-drawer-container
+    class="drawer_wrap"
+    [items]="items"
+    style="display: flex"
+  >
+    <div class="layout-body-wrap">
+      <adm-bread-crumbs></adm-bread-crumbs>
+      <div class="layout-body" id="content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </adm-drawer-container>
+</div>

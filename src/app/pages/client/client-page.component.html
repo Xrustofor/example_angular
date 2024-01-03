@@ -1,0 +1,69 @@
+<div class="client-layout">
+  <kendo-grid [kendoGridBinding]="items" kendoGridSelectBy="id" [resizable]="true" [pageSize]="10" [pageable]="true"
+    [columnMenu]="true">
+
+    <ng-template kendoGridToolbarTemplate>
+      <div class="filters">
+
+        <div class="row top">
+          <adm-search-autocomplete [width]="420" label="Client" placeholder="Search Client" valueField="value"
+            (onInput)="inputService.uploadClients($event)" [items]="inputService.inputClient"
+            [item]="inputService.inputClientName" [loading]="inputService.inputClientLoading"
+            (select)="urlQueryService.getClient($event)" />
+
+          <div class="custom_status_box">
+            <p>Status:</p>
+            <adm-tabs-slider [items]="inputService.statuses" [activeTabIndex]="inputService.selectedStatusIndex"
+              [reverseKeyValue]="true" (onSelect)="inputService.filterChangeStatus($event)" />
+          </div>
+        </div>
+
+        <div class="row bottom">
+          <adm-button-link bg="green" prependIcon="plus" link="add">
+            Add Client
+          </adm-button-link>
+        </div>
+
+      </div>
+    </ng-template>
+
+    <ng-template kendoGridNoRecordsTemplate>
+      <adm-loader-skeleton [loading]="loading" [itemHeight]="'54px'" [hostHeight]="'580px'" [count]="10" [gap]="'5px'"
+        [padding]="'5px'" />
+    </ng-template>
+
+    <kendo-grid-column *ngFor="let item of columns" [field]="item.field" [title]="item.title" [width]="item.width"
+      [columnMenu]="false" headerClass="grid-header-column-wrap">
+
+      <ng-template kendoGridHeaderTemplate let-column let-service="service" *ngIf="item.field !== 'action'">
+        <div class="grid-header" (click)="tableSortingService.sortChange(item.field)">
+          {{ column.title }}
+          <div class="icon-sort" *ngIf="item.sort">
+            <kendo-svg-icon [icon]="getIcon('upArrow')" size="medium" class="icon" [style.width]="'12px'"
+              [style.color]="'#728090'" [class.down-icon]="item.sort === -1" />
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'status'">
+        <div class="status" [style]="statusColor[dataItem['status']]">
+          {{ dataItem.status | capitalize }}
+        </div>
+      </ng-template>
+
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'action'">
+        <div class="buttons">
+          <adm-button br="green" color="green" prependIcon="eye" (onClick)="review(dataItem.id)" />
+        </div>
+      </ng-template>
+    </kendo-grid-column>
+
+    <ng-template kendoPagerTemplate>
+      <div class="pagination_wrap">
+        <adm-pagination [item]="meta" [buttonCount]="5" (onChange)="urlQueryService.actionPagination($event)"
+          [loading]="loading" />
+      </div>
+    </ng-template>
+
+  </kendo-grid>
+</div>

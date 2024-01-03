@@ -1,0 +1,110 @@
+<div class="media_partner">
+  <kendo-grid class="media_partner_grid" [kendoGridBinding]="items" kendoGridSelectBy="id" [resizable]="true"
+    [pageSize]="10" [pageable]="true" [columnMenu]="true">
+
+    <ng-template kendoGridToolbarTemplate>
+      <div class="filters">
+
+        <div class="row top">
+          <adm-search-autocomplete [width]="420" label="Media Partner" placeholder="Search Media Partner"
+            valueField="value" (onInput)="inputService.uploadMediaPartners($event)"
+            [items]="inputService.inputMediaPartner" [item]="inputService.inputMediaPartnerName"
+            [loading]="inputService.inputMediaPartnerLoading" (select)="urlQueryService.getMediaPartner($event)" />
+
+          <div class="custom_status_box">
+            <p>Status:</p>
+            <adm-tabs-slider [items]="inputService.statuses" [activeTabIndex]="inputService.selectedStatusIndex"
+              (onSelect)="inputService.filterChangeStatus($event)" />
+          </div>
+        </div>
+
+        <div class="row bottom">
+          <adm-button-link bg="green" prependIcon="plus" link="add">
+            Add Media Partner
+          </adm-button-link>
+
+          <adm-button br="orange" bg="lightorange" color="orange" prependIcon="file" (onClick)="getExport()">
+            Export
+          </adm-button>
+
+          <adm-button-link br="blue" bg="lightblue" color="blue" prependIcon="fileVerification"
+            link="./request-verification">
+            Request Verification
+          </adm-button-link>
+        </div>
+      </div>
+    </ng-template>
+
+    <kendo-grid-column *ngFor="let item of columns" [field]="item.field" [title]="item.title" [width]="item.width"
+      [columnMenu]="false" headerClass="grid-header-column-wrap">
+
+      <ng-template kendoGridHeaderTemplate let-column let-service="service" *ngIf="item.field !== 'action'">
+        <div class="grid-header" (click)="tableSortingService.sortChange(item.field)">
+          {{ column.title }}
+          <div class="icon-sort" *ngIf="item.sort">
+            <kendo-svg-icon [icon]="getIcon('upArrow')" size="medium" class="icon" [style.width]="'12px'"
+              [style.color]="'#728090'" [class.down-icon]="item.sort === -1" />
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'media_kit_upload'">
+        <div class="custom_cell">
+          <adm-button br="red" color="red" prependIcon="download" (onClick)="download(item.field)" />
+          <p>{{ dataItem['media_kit_upload'] }}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'rate_card_upload'">
+        <div class="custom_cell">
+          <adm-button br="red" color="red" prependIcon="download" (onClick)="download(item.field)" />
+          <p>{{ dataItem['rate_card_upload'] }}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'w9_upload'">
+        <div class="custom_cell">
+          <adm-button br="red" color="red" prependIcon="download" (onClick)="download(item.field)" />
+          <p>{{ dataItem['w9_upload'] }}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'w9_upload'">
+        <div class="custom_cell">
+          <adm-button br="red" color="red" prependIcon="download" (onClick)="download(item.field)" />
+          <p>{{ dataItem['w9_upload'] }}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'website'">
+        <div class="custom_cell">
+          <adm-button-link br="blue" color="blue" prependIcon="link" [link]="item.field" />
+          <p class="ellipsis">{{ dataItem['website'] }}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'certification_upload'">
+        <div class="custom_cell">
+          <adm-button br="red" color="red" prependIcon="download" (onClick)="download(item.field)" />
+          <p>{{ dataItem['certification_upload'] }}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'do_status'">
+        <div class="custom_status_cell" [style]="statusColor[dataItem['do_status']['key']]">
+          <p>{{ dataItem['do_status']['value']}}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'status'">
+        <div class="custom_status_cell" [style]="statusColor[dataItem['status']['key']]">
+          <p>{{ dataItem['status']['value']}}</p>
+        </div>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'action'">
+        <adm-button-link br="orange" color="orange" prependIcon="edit" [link]="'./' + dataItem['uuid'] + '/edit'" />
+      </ng-template>
+    </kendo-grid-column>
+
+    <ng-template kendoPagerTemplate>
+      <div class="pagination_wrap">
+        <adm-pagination [item]="meta" [buttonCount]="5" (onChange)="urlQueryService.actionPagination($event)"
+          [loading]="loading" />
+      </div>
+    </ng-template>
+
+  </kendo-grid>
+</div>

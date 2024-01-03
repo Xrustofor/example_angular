@@ -1,0 +1,8 @@
+<div id="custom-modal" class="custom-modal" animate [animateToggle]="isShow">
+    <div class="modal-content" animate [animateToggle]="isShow" outsideClick (onOutsideClick)="close()">
+        <div class="scroll">
+            <h1 *ngIf="params?.name">{{ params?.name }}</h1>
+            <ng-container *ngComponentOutlet="content"></ng-container>
+        </div>
+    </div>
+</div>

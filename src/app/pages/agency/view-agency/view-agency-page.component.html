@@ -1,0 +1,184 @@
+<div class="view-agency-layout" disabledForReadonlyMode *ngIf="agency">
+
+  <div class="edit-wrapper">
+    <adm-button-link bg="orange" prependIcon="edit" [link]="'../../edit/' + agency.general.uuid">
+      Edit Agency
+    </adm-button-link>
+  </div>
+
+  <div class="view-groups">
+
+    <section class="general-information-view">
+      <h4>General Information</h4>
+      <div class="rows">
+        <div class="row">
+          <div class="adm-input-custom">
+            <label for="name">Agency Name</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ agency.general.name }}</p>
+            </div>
+          </div>
+          <div class="adm-input-custom combobox-input">
+            <label for="country_id">Country</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ agency.general.country.value }}</p>
+            </div>
+          </div>
+          <div class="adm-input-custom">
+            <label for="state">State</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ agency.general.state }}</p>
+            </div>
+          </div>
+          <div class="adm-input-custom">
+            <label for="city">City</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ agency.general.city }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="adm-input-custom">
+            <label for="street">Street Address</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ agency.general.street }}</p>
+            </div>
+          </div>
+          <div class="adm-input-custom">
+            <label for="postal_code">Zip Code</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ agency.general.postal_code }}</p>
+            </div>
+          </div>
+          <div class="adm-input-custom">
+            <label for="code">Agency Code</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ agency.general.code }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="main-agency-contact-view">
+      <h4>Main Agency Contact</h4>
+      <div class="rows">
+        <div class="row">
+          <div class="adm-input-custom">
+            <label for="last_name">Last Name</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ agency.main.last_name }}</p>
+            </div>
+          </div>
+          <div class="adm-input-custom">
+            <label for="first_name">First Name</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ agency.main.first_name }}</p>
+            </div>
+          </div>
+          <div class="adm-input-custom combobox-input">
+            <label>Job Title</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ agency.main.position }}</p>
+            </div>
+          </div>
+          <div class="adm-input-custom">
+            <label for="email">Contact Email</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ agency.main.email }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="adm-input-custom">
+            <label for="phone">Contact Phone</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ agency.main.phone | mask: MASK_PHONE }}</p>
+            </div>
+          </div>
+          <div class="adm-input-custom">
+            <label>Role</label>
+            <div class="custom-view-data-wrapper">
+              <p>{{ mainAgencyRole }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="table-wrapper">
+    <div class="table-scroll">
+      <h4>Other Contacts</h4>
+
+      <section class="other-contacts-view">
+        <kendo-grid [resizable]="true" [columnMenu]="false" [data]="agency.contacts" [contentEditable]="false">
+
+          <kendo-grid-column field="last_name" title="Last Name">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.last_name }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="first_name" title="First Name">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.first_name }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="position" title="Job Title">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom combobox-input">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.position }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="email" title="Email">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.email }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="phone" title="Phone">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.phone | mask: MASK_PHONE }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="role" title="Role">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom combobox-input">
+                <div class="custom-view-data-wrapper cell">
+                  <p>{{ dataItem.role.value }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="status" title="Status">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="adm-input-custom combobox-input">
+                <div class="custom-view-data-wrapper cell">
+                  <p [style]="statusColor[dataItem['status']]">{{ dataItem.status | capitalize }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </kendo-grid-column>
+        </kendo-grid>
+      </section>
+    </div>
+  </section>
+</div>

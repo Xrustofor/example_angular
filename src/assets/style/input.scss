@@ -1,0 +1,164 @@
+.adm-input-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  max-width: 420px;
+  width: 100%;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.adm-input-custom {
+  .adm-input-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    a {
+      color: #f93d68;
+      font-size: 1.3rem;
+      font-family: "Roboto Regular";
+      cursor: pointer;
+    }
+  }
+  label {
+    font-family: "Roboto Regular";
+    color: #35383e;
+    min-width: 70px;
+    font-size: 1.4rem;
+  }
+  & > input {
+    display: flex;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 1.4rem;
+    border: 1px solid #728090;
+    background-color: #f6f8fc;
+    border-radius: 4px;
+    &.ng-valid.ng-touched {
+      border: 1px solid green;
+    }
+    &.ng-invalid.ng-touched {
+      border: 1px solid #f93d68;
+    }
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 7px rgba(114, 128, 144, 0.6);
+    }
+  }
+}
+
+.adm-input-simple {
+  border: 1px solid #728090;
+  background: #f6f8fc;
+  padding: 8px 12px;
+  outline: none;
+  border-radius: 4px;
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 7px rgba(114, 128, 144, 0.6);
+  }
+}
+
+.validation {
+  display: flex;
+  flex-direction: column;
+  small {
+    margin-bottom: 5px;
+    color: #f93d68;
+    font-size: 1.2rem;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+span.require {
+  color: #d86a62;
+  font-family: "Roboto Regular";
+  font-style: normal;
+  font-size: 1.4rem;
+}
+
+input[ng-reflect-is-disabled="true"],
+input[disabled],
+input[readonly] {
+  opacity: 0.7;
+  &:focus-visible {
+    box-shadow: none;
+    border: 1px solid #728090;
+  }
+  &.ng-valid.ng-touched {
+    border: 1px solid #728090;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #f6f8fc inset !important;
+}
+
+// .button_link {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   border-radius: 4px;
+//   padding: 9.5px 15px;
+//   color: black;
+//   font-size: 14px;
+//   transition: 0.1s opacity;
+//   cursor: pointer;
+
+//   kendo-svg-icon {
+//     margin-right: 15px;
+//   }
+
+//   &.red {
+//     color: white;
+//     background-color: #c14862;
+//   }
+
+//   &.orange {
+//     background-color: #f1a33c;
+//     color: white;
+//   }
+
+//   &.green {
+//     background-color: #4ea079;
+//     color: white;
+//   }
+
+//   &:hover {
+//     opacity: 0.85;
+//   }
+// }
+
+.active_hover {
+  position: relative;
+
+  &:before {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 0%;
+    left: 50%;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    opacity: 0;
+    z-index: -1;
+    transition: 0.2s;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.06);
+  }
+
+  &:hover:before {
+    width: 100%;
+    height: 100%;
+    left: 0%;
+    top: 0%;
+    opacity: 1;
+  }
+}

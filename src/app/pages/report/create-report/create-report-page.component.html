@@ -1,0 +1,216 @@
+<div class="create-report-layout" disabledForReadonlyMode>
+
+  <section class="form-groups">
+    <form class="general-information-form" [formGroup]="generalInformationForm">
+      <div class="rows">
+        <div class="row">
+          <div class="adm-input-custom">
+            <label for="name">Report Name <span class="require">*</span></label>
+            <input id="name" [class.ng-invalid]="isInvalidGeneralInfoFormControl('name')" placeholder="Report Name"
+              [formControlName]="'name'">
+          </div>
+          <div class="adm-input-custom read">
+            <label for="report_id">Report ID</label>
+            <div class="custom-view-data-wrapper">
+              <p>GYT74846208IU98</p>
+            </div>
+          </div>
+          <div class="adm-input-custom group">
+            <label>Start Date <span class="require">*</span></label>
+            <div class="custom_datepicker">
+              <kendo-datepicker formControlName="start_date" [(value)]="dateStart"
+                [class.ng-invalid]="isInvalidGeneralInfoFormControl('start_date')" />
+            </div>
+          </div>
+          <div class="adm-input-custom group">
+            <label>End Date <span class="require">*</span></label>
+            <div class="custom_datepicker">
+              <kendo-datepicker formControlName="end_date" [(value)]="dateEnd"
+                [class.ng-invalid]="isInvalidGeneralInfoFormControl('end_date')" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <form class="filters-form" [formGroup]="filtersForm">
+      <h4>Add Filter</h4>
+      <div class="rows">
+        <div class="row">
+          <div class="adm-input-custom combobox-input">
+            <label for="agency">Agency</label>
+            <kendo-combobox placeholder="Select Agency" [data]="agencies" textField="value" valueField="key"
+              [valuePrimitive]="true" [formControlName]="'agency'"
+              [class.ng-invalid]="isInvalidFiltersFormControl('agency')" />
+          </div>
+          <div class="adm-input-custom combobox-input">
+            <label for="client">Client</label>
+            <kendo-combobox placeholder="Select Client" [data]="clients" textField="value" valueField="key"
+              [valuePrimitive]="true" [formControlName]="'client'"
+              [class.ng-invalid]="isInvalidFiltersFormControl('client')" />
+          </div>
+          <div class="adm-input-custom combobox-input">
+            <label for="year">Year</label>
+            <div class="custom_datepicker">
+              <kendo-datepicker formControlName="year"
+                [class.ng-invalid]="isInvalidFiltersFormControl('year')" />
+            </div>
+          </div>
+          <div class="adm-input-custom combobox-input">
+            <label for="campaign">Campaign</label>
+            <kendo-combobox placeholder="Select Campaign" [data]="campaigns" textField="value" valueField="key"
+              [valuePrimitive]="true" [formControlName]="'campaign'"
+              [class.ng-invalid]="isInvalidFiltersFormControl('campaign')" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="adm-input-custom combobox-input">
+            <label for="audience">Audience</label>
+            <kendo-combobox placeholder="Select Audience" [data]="audiencies" textField="value" valueField="key"
+              [valuePrimitive]="true" [formControlName]="'audience'"
+              [class.ng-invalid]="isInvalidFiltersFormControl('audience')" />
+          </div>
+          <div class="adm-input-custom combobox-input">
+            <label for="media_channel">Media Channel</label>
+            <kendo-combobox placeholder="Select Media Channel" [data]="mediaChannels" textField="value" valueField="key"
+              [valuePrimitive]="true" [formControlName]="'media_channel'"
+              [class.ng-invalid]="isInvalidFiltersFormControl('media_channel')" />
+          </div>
+          <div class="adm-input-custom combobox-input">
+            <label for="campaign_status">Campaign Status</label>
+            <kendo-combobox placeholder="Select Campaign Status" [data]="campaignStatuses" textField="value"
+              valueField="key" [valuePrimitive]="true" [formControlName]="'campaign_status'"
+              [class.ng-invalid]="isInvalidFiltersFormControl('campaign_status')" />
+          </div>
+          <div class="adm-input-custom combobox-input">
+            <label for="media_plan">Media Plan</label>
+            <kendo-combobox placeholder="Select Media Plan" [data]="mediaPlans" textField="value" valueField="key"
+              [valuePrimitive]="true" [formControlName]="'media_plan'"
+              [class.ng-invalid]="isInvalidFiltersFormControl('media_plan')" />
+          </div>
+          <div class="adm-input-custom combobox-input">
+            <label for="media_plan_status">Media Plan Status</label>
+            <kendo-combobox placeholder="Select Media Plan Status" [data]="mediaPlanStatuses" textField="value"
+              valueField="key" [valuePrimitive]="true" [formControlName]="'media_plan_status'"
+              [class.ng-invalid]="isInvalidFiltersFormControl('media_plan_status')" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="adm-input-custom combobox-input">
+            <label for="media_outlet">Media Outlet</label>
+            <kendo-combobox placeholder="Select Media Outlet" [data]="mediaOutlets" textField="value" valueField="key"
+              [valuePrimitive]="true" [formControlName]="'media_outlet'"
+              [class.ng-invalid]="isInvalidFiltersFormControl('media_outlet')" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section class="dimension">
+    <h4>Add Dimension</h4>
+    <div class="checkbox-wrapper">
+      <div class="row">
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Agency</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Campaign End Date</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Media Plan</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Broadcast Week</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Spec</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Client</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Budget Amount</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Media Plan Status</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Placement</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Targeting</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Year</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Purchased Amount</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Media Outlet</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Program</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Creative Assignment</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Campaign Name</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Actualized Amount</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Audience Segment</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Daypart</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Cost Type</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Campaign Start Date</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Campaign Status</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Media Channel</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Unit</label>
+        </div>
+        <div class="dimension-item">
+          <label><input type="checkbox" size="large" kendoCheckBox [checked]="true" />Total Coat</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="adm-input-custom share-with">
+    <label>Share With <span class="require">*</span></label>
+    <adm-search-autocomplete [width]="420" placeholder="Search User" valueField="value"
+      (onInput)="getAutocompleteUser($event)" [items]="inputUser" [item]="inputUserName"
+      [loading]="inputUserLoading" />
+  </section>
+
+  <section class="run-report">
+    <adm-button bg="blue" prependIcon="reporting">Run Report</adm-button>
+  </section>
+
+  <div class="footer">
+    <adm-button bg="green" prependIcon="roundSuccess" (onClick)="submitCreateReport()">Save</adm-button>
+    <adm-button bg="orange" prependIcon="roundCancel" (onClick)="goBack()">Cancel</adm-button>
+  </div>
+</div>

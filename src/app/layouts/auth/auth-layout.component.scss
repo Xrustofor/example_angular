@@ -1,0 +1,43 @@
+.auth-layout{
+  min-height: 100vh;
+  font-size: 1.4rem;
+  display: flex;
+  flex-direction: row;
+}
+.left{
+  background: linear-gradient(205.68deg, #E03D3F 0%, #5058D8 100%);
+  color: #ffffff;
+  max-width: 490px;
+  width: 100%;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 25px;
+}
+.left-top{
+  display: flex;
+  margin-bottom: 35px;
+  img{
+    width: 100%;
+    max-width: 262px;
+  }
+}
+.left-bottom{
+  font-family: "Mulish";
+  font-weight: bold;
+  color: #FFFFFF;
+  span{
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+  }
+  h2{
+    font-size: 4rem;
+  }
+}
+
+.auth-body{
+  width: 100%;
+  position: relative;
+}

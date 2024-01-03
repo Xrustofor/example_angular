@@ -1,0 +1,25 @@
+<!-- With dynamic height -->
+<div *ngIf="hostHeight === 'auto'" class="skeleton-list"
+  animate [animateToggle]="loading"
+  [style.padding]="padding"
+  [style.gap]="gap">
+  <div class="skeleton"
+    *ngFor="let count of getLoadingCount()"
+    [style.min-height]="itemHeight">
+  </div>
+</div>
+
+<!-- If need static height -->
+<div *ngIf="hostHeight !== 'auto'" class="skeleton-wrapper" [style.height]="hostHeight">
+  <div class="skeleton-list"
+    animate [animateToggle]="loading"
+    [style.padding]="padding"
+    [style.gap]="gap">
+    <div class="skeleton"
+      *ngFor="let count of getLoadingCount()"
+      [style.min-height]="itemHeight">
+    </div>
+  </div>
+</div>
+
+<ng-content></ng-content>

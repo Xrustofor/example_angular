@@ -1,0 +1,19 @@
+.app_progressbar{
+  position: relative;
+}
+kendo-progressbar{
+  border-radius: 0;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: linear .3s;
+  height: 0;
+  &.show{
+    height: 3px;
+    transition: linear .3s;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,46 @@
+.request-for-proposal-layout {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.filters {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+
+    .row {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+
+        &:not(:first-child) {
+            margin-top: 18px;
+        }
+
+        adm-search-autocomplete {
+            max-width: 320px;
+            width: 100%;
+        }
+        adm-combobox {
+            max-width: 420px;
+            width: 100%;
+        }
+    }
+
+    > :nth-child(1) {
+        > :nth-child(1) {
+            width: 320px;
+        }
+        > :nth-child(2),
+        > :nth-child(3) {
+            width: 450px;
+        }
+    }
+    > :nth-child(2) {
+        > :nth-child(1) {
+            width: 320px;
+        }
+    }
+}

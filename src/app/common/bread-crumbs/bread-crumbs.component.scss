@@ -1,0 +1,76 @@
+.bread-crumbs {
+  padding: 11px 24px;
+  padding-left: 20px;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 30px;
+
+  .icon {
+    margin-right: 7px;
+    display: flex;
+    justify-content: center;
+
+    kendo-svg-icon {
+      width: 15px;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  li {
+    font-size: 1.4rem;
+    font-family: "Roboto Regular";
+    display: flex;
+    position: relative;
+    border-radius: 4px;
+    transition: 0.05s;
+    cursor: pointer;
+
+    a {
+      display: flex;
+      color: #728090;
+      padding: 8px 12px;
+      border-radius: inherit;
+    }
+
+    &:before {
+      background-color: #f6f8fc;
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 7px;
+      height: 7px;
+      border: 1px solid #728090;
+      border-bottom: 0;
+      border-left: 0;
+      top: 12px;
+      left: calc(100% + 10px);
+      transform: rotate(45deg);
+    }
+
+    &:last-child {
+      background-color: #fff5f7;
+      color: #c14862;
+
+      a {
+        text-decoration: auto;
+        color: inherit;
+        cursor: default;
+      }
+
+      &::before,
+      &::after {
+        content: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<div class="header-wrap">
+  <div class="left">
+    <div class="icon-wrap">
+      <div class="circle" [style.background-image]="'url(' + getPhotoUserUrl+ ')'">
+      </div>
+    </div>
+    <span class="header-text">Welcome, {{ username }}!</span>
+  </div>
+  <div class="center">
+    <div class="search-wrapper">
+      <input placeholder="Search">
+      <button type="button" class="btn">
+        <kendo-svg-icon [icon]="getIcon('search')" style="color: #728090" />
+      </button>
+    </div>
+  </div>
+  <div class="right">
+    <ul class="icon-buttons">
+      <li>
+        <a type="button" class="btn active_hover" routerLinkActive="active" [routerLink]="notificationUrl">
+          <kendo-svg-icon [icon]="getIcon('bell')" style="color: #FFFFFF" />
+        </a>
+      </li>
+      <li>
+        <a type="button" class="btn active_hover" routerLinkActive="active" [routerLink]="manageAccountUrl">
+          <kendo-svg-icon [icon]="getIcon('settings')" style="color: #FFFFFF" />
+        </a>
+      </li>
+      <li>
+        <adm-button br="lightgray" color="lightgray" prependIcon="logout" (onClick)="logOut()">
+          Log Out
+        </adm-button>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="campaigns-layout">
+  <kendo-grid [kendoGridBinding]="items" kendoGridSelectBy="id" [resizable]="true" [pageSize]="10" [pageable]="true"
+    [columnMenu]="true">
+    <ng-template kendoGridToolbarTemplate>
+
+      <div class="filters">
+        <div class="row top">
+          <adm-search-autocomplete [width]="420" label="Agency" placeholder="Search Agency Name" valueField="value"
+            (onInput)="inputService.uploadAgencies($event)" [items]="inputService.inputAgency"
+            [item]="inputService.inputAgencyName" [loading]="inputService.inputAgencyLoading"
+            (select)="urlQueryService.getAgency($event)" />
+
+          <adm-combobox [width]="420" label="Select Client" placeholder="Client Name" textField="value" valueField="key"
+            [items]="inputService.inputClient" [item]="inputService.inputClientObject"
+            (select)="urlQueryService.getClient($event)"
+            (filterChange)="inputService.filterChangeClient($event)" />
+
+          <adm-combobox [width]="310" label="Select Year" placeholder="Year" textField="value" valueField="value"
+            [items]="inputService.years | filter: inputService.changeYear: 'value' " [item]="inputService.selectedYear"
+            (select)="urlQueryService.getYear($event)"
+            (filterChange)="inputService.filterChangeYear($event)" />
+        </div>
+
+        <div class="row bottom">
+          <adm-search-autocomplete [width]="420" placeholder="Search by Keyword" valueField="value"
+            [item]="inputService.search" [loading]="inputService.searchLoading"
+            (onInput)="inputService.filterChangeSearch($event)" [isPopup]="false" />
+
+          <div class="custom_status_box">
+            <p>Status:</p>
+            <adm-tabs-slider [items]="inputService.statuses" [activeTabIndex]="inputService.selectedStatusIndex"
+              [reverseKeyValue]="true" (onSelect)="inputService.filterChangeStatus($event)" />
+          </div>
+        </div>
+
+        <div class="row">
+          <adm-button-link bg="green" prependIcon="plus" link="add">
+            Add Campaign
+          </adm-button-link>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template kendoGridNoRecordsTemplate>
+      <adm-loader-skeleton [loading]="loading" [itemHeight]="'54px'" [hostHeight]="'580px'" [count]="10" [gap]="'5px'"
+        [padding]="'5px'" />
+    </ng-template>
+
+    <kendo-grid-column *ngFor="let item of columns" [field]="item.field" [title]="item.title" [width]="item.width"
+      [columnMenu]="false" headerClass="grid-header-column-wrap">
+
+      <ng-template kendoGridHeaderTemplate let-column let-service="service" *ngIf="item.field !== 'action'">
+        <div class="grid-header" (click)="tableSortingService.sortChange(item.field)">
+          {{ column.title }}
+          <div class="icon-sort" *ngIf="item.sort">
+            <kendo-svg-icon [icon]="getIcon('upArrow')" size="medium" class="icon" [style.width]="'12px'"
+              [style.color]="'#728090'" [class.down-icon]="item.sort === -1" />
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'status'">
+        <div class="custom_status_cell" [style]="statusColor[dataItem['status']['color']]">
+          <div>{{ dataItem.status.title | capitalize }}</div>
+        </div>
+      </ng-template>
+
+      <ng-template kendoGridCellTemplate let-dataItem *ngIf="item.field === 'action'">
+        <div class="custom_buttons_box">
+          <adm-button br="green" color="green" prependIcon="eye" (onClick)="review(dataItem.id)" />
+          <adm-button br="red" color="red" prependIcon="trash" (onClick)="actionDelete(dataItem.id)" />
+        </div>
+      </ng-template>
+    </kendo-grid-column>
+
+    <ng-template kendoPagerTemplate>
+      <div class="pagination_wrap">
+        <adm-pagination [item]="meta" [buttonCount]="5" (onChange)="urlQueryService.actionPagination($event)"
+          [loading]="loading" />
+      </div>
+    </ng-template>
+
+  </kendo-grid>
+</div>
+
+<adm-dialog [width]="340" [opened]="showDialog" (onClose)="resetSelectedData()">
+  <div class="dialog-remove-title" header>Delete Campaign</div>
+  <div class="dialog-remove-content">
+    <p class="mb-3">Are you sure you want to delete Campaign</p>
+    <h3 *ngIf="selectedCampaign">{{ selectedCampaign.campaign }}</h3>
+  </div>
+  <div class="dialog-remove-footer" footer>
+    <adm-button disabledForReadonlyMode bg="red" prependIcon="trash" (onClick)="deleteItem()">Delete</adm-button>
+    <adm-button bg="orange" prependIcon="roundCancel" (onClick)="resetSelectedData()">Cancel</adm-button>
+  </div>
+</adm-dialog>
